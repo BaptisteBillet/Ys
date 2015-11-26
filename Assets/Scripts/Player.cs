@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public partial class Player : MonoBehaviour {
     public int ID;
     public int health;
     public bool isShieldUp;
@@ -23,6 +23,12 @@ public class Player : MonoBehaviour {
     public int countCollision = 0;
     public bool collideAtStart = false;
     bool needValidMove = false;
+
+    public Animator m_CercleAnimator;
+    public Animator m_LifeAnimator;
+
+    private int m_Damage;
+
 	// Use this for initialization
 
 
@@ -166,12 +172,17 @@ public class Player : MonoBehaviour {
         }
         if (turn)
         {
+            m_CercleAnimator.SetTrigger("Open");
+            m_LifeAnimator.SetTrigger("Close");
+
             transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
             startTypeZone = currentTypeZone;
             countCollision = 0;
         }
         else
         {
+            m_CercleAnimator.SetTrigger("Close");
+            m_LifeAnimator.SetTrigger("Open");
             isMovingBump = turn;
             if (currentTypeZone == TypeZone.TerrainType.MOUNTAIN)
             {
@@ -207,7 +218,10 @@ public class Player : MonoBehaviour {
             // get dmg
             if((health > damage)&&(damage > 0))
             {
-                health -= damage;
+                m_Damage = damage;
+
+                m_LifeAnimator.SetTrigger("Open");
+                Invoke("AssumeDamage", 0.26f);
                 
             }
             else
@@ -219,6 +233,9 @@ public class Player : MonoBehaviour {
         }
     }
 
-
+    private void AssumeDamage()
+    {
+        health -= m_Damage;
+    }
 
 }

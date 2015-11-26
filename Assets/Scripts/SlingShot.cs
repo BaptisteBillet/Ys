@@ -26,6 +26,8 @@ public class SlingShot : MonoBehaviour {
 	public int myID;
     bool isOnPlayer = false;
 
+    bool isCircleAlreadyAppear=false;
+
 	// Use this for initialization
 	void Start () {
         distanceMax = 6;
@@ -41,6 +43,7 @@ public class SlingShot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (GameManagerScript.instance.isMouseOnCurrentPlayer(myID, out hit))
         {
             isOnPlayer = true;
@@ -94,6 +97,11 @@ public class SlingShot : MonoBehaviour {
     }
     void ScaleJauge()
     {
+
+
+
+
+
         lineRenderer.enabled = true;
         Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosInWorld.z = 0;
@@ -117,6 +125,18 @@ public class SlingShot : MonoBehaviour {
 
     void OnMouseDown()
     {
+        if(isCircleAlreadyAppear==false)
+        {
+            isCircleAlreadyAppear = true;
+            GameManagerScript.instance.Player1.GetComponent<Player>().m_CercleAnimator.SetTrigger("Close");
+            GameManagerScript.instance.Player1.GetComponent<Player>().m_LifeAnimator.SetTrigger("Close");
+
+            GameManagerScript.instance.Player2.GetComponent<Player>().m_CercleAnimator.SetTrigger("Close");
+            GameManagerScript.instance.Player2.GetComponent<Player>().m_LifeAnimator.SetTrigger("Close");
+        }
+
+
+
         StartCoroutine(CountDown(0.5f));
         if (!action && myID == GameManagerScript.instance.currentId && !transform.parent.GetComponent<Player>().doubleTap && !isOnPlayer && !transform.parent.GetComponent<Player>().isMovingBump && !transform.parent.GetComponentInChildren<ejection>().ejectionAction)
 		{
