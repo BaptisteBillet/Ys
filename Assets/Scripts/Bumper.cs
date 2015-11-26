@@ -6,7 +6,7 @@ public class Bumper : MonoBehaviour {
     Vector3 playerPosition;
     Vector3 dir;
 
-    public float puissance = 100;
+    public float puissance = 10;
 	// Use this for initialization
 	void Start () {
         if (transform.gameObject.name == "Bumper")
@@ -16,10 +16,6 @@ public class Bumper : MonoBehaviour {
         else if (transform.gameObject.name == "MovableBumper")
         {
             puissance = 100;
-        }
-        else
-        {
-            puissance = 50;
         }
         
         bumperPosition = new Vector3(transform.position.x, transform.position.y, 0.0f);
