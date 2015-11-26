@@ -117,10 +117,19 @@ public class SlingShot : MonoBehaviour {
         {
             dist = distanceMax;
         }
+
+        if (dist > 3)
+        {
+            lineRenderer.SetColors(Color.yellow, Color.yellow);
+        }
+        else
+        {
+            lineRenderer.SetColors(Color.red, Color.red);
+        }
         lineRenderer.SetPosition(1, transform.position + (direction * dist));
         
 
-        lineRenderer.SetColors(Color.yellow, new Color(255.0f, 255.0f - (100 + dist), 0.0f));
+        
     }
 
     void OnMouseDown()
