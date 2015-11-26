@@ -118,7 +118,7 @@ public class SlingShot : MonoBehaviour {
     void OnMouseDown()
     {
         StartCoroutine(CountDown(0.5f));
-        if (!action && myID == GameManagerScript.instance.currentId && !transform.parent.GetComponent<Player>().doubleTap && !isOnPlayer && !transform.parent.GetComponent<Player>().isMovingBump)
+        if (!action && myID == GameManagerScript.instance.currentId && !transform.parent.GetComponent<Player>().doubleTap && !isOnPlayer && !transform.parent.GetComponent<Player>().isMovingBump && !transform.parent.GetComponentInChildren<ejection>().ejectionAction)
 		{
 			shoot = true;
 			playing = true;

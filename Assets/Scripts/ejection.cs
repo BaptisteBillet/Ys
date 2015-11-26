@@ -42,7 +42,7 @@ public class ejection : MonoBehaviour
     {
         otherPlayer = GameManagerScript.instance.getOtherPlayer(player.ID);
         doubleTap = true;
-        if (Vector3.Distance(otherPlayer.transform.position, this.transform.position) < RangeAttackCAC + (otherPlayer.transform.localScale.x / 2)&&!ejectionAction)
+        if (Vector3.Distance(otherPlayer.transform.position, this.transform.position) < RangeAttackCAC + (otherPlayer.transform.localScale.x / 2)&&!ejectionAction && !transform.parent.GetComponentInChildren<SlingShot>().action)
         {
             //attackCac = true;
             otherPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
