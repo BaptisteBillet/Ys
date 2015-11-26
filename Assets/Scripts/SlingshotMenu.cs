@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class SlingshotMenu : MonoBehaviour {
-
+    
     Vector3 mouseDownPos, mouseUpPos;
     public float dist = 2;
     public bool shoot = false;
     public bool action = false;
-    public float force = 5;
+    public float force ;
     public float distanceMax = 7;
     bool isSlingShotting = false;
     LineRenderer lineRenderer;
@@ -16,7 +16,7 @@ public class SlingshotMenu : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-        force = 50;
+        force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
@@ -30,6 +30,31 @@ public class SlingshotMenu : MonoBehaviour {
         {
             action = false;
             transform.GetComponentInParent<Rigidbody>().velocity *=0;
+            int layer = 1 << 20;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, Mathf.Infinity, layer);
+            Debug.DrawRay(transform.position, Vector3.forward, Color.red);
+            if (hit.collider != null)
+            {
+                switch(hit.collider.name)
+                {
+                    case "PlayCollider":
+                        Debug.Log("play");
+                        Application.LoadLevelAsync("test");
+                        break;
+                    case "OptionCollider":
+                        Debug.Log("option");
+                        break;
+                    case "CreditCollider":
+                        Debug.Log("credit");
+                        break;
+                    case "QuitCollider":
+                        Application.Quit();
+                        break;
+                    default:
+                        Debug.Log("other");
+                        break;
+                }
+            }
         }
 	}
 
@@ -37,7 +62,6 @@ public class SlingshotMenu : MonoBehaviour {
     {
         if (Input.GetMouseButton(0) && shoot && isSlingShotting) // si le joueur est en train de tirer
         {
-            Debug.Log("DRAW");
             // on scale la jauge de puissance en fonction de la distance
             ScaleJauge();
         }
@@ -46,26 +70,32 @@ public class SlingshotMenu : MonoBehaviour {
     void ScaleJauge()
     {
         lineRenderer.enabled = true;
-        Vector3 mousePosInWorld;// = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 cursorPos = Camera.main.WorldToScreenPoint(transform.position);
-        mousePosInWorld = Input.mousePosition;
+        Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorPos = transform.position;
         mousePosInWorld.z = 0;
 
         dist = Vector3.Distance(new Vector3(cursorPos.x, cursorPos.y, 0.0f), new Vector3(mousePosInWorld.x, mousePosInWorld.y, 0.0f));
         lineRenderer.SetPosition(0, new Vector3(cursorPos.x, cursorPos.y, 0.0f));
         Vector3 direction = mousePosInWorld - cursorPos;
         direction.Normalize();
-        Debug.Log(dist);
         direction = Vector3.ClampMagnitude(direction, 1.0f);
         direction.z = 0;
         if (dist > distanceMax)
         {
             dist = distanceMax;
         }
+        if (dist > 3)
+        {
+            lineRenderer.SetColors(Color.yellow, Color.yellow);
+        }
+        else
+        {
+            lineRenderer.SetColors(Color.red, Color.red);
+        }
         lineRenderer.SetPosition(1, cursorPos + (direction * dist));
 
 
-        lineRenderer.SetColors(Color.yellow, new Color(255.0f, 255.0f - (100 + dist), 0.0f));
+        
     }
 
     void OnMouseDown()
@@ -81,12 +111,10 @@ public class SlingshotMenu : MonoBehaviour {
         }*/
         if (!action)
         {
-            Debug.Log("mouseDown");
             shoot = true;
             isSlingShotting = true;
             transform.parent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
             mouseDownPos = transform.parent.position;
-            Debug.Log("mouseDown:"+mouseDownPos);
         }
 
     }
@@ -98,24 +126,22 @@ public class SlingshotMenu : MonoBehaviour {
         {
             mouseDownPos.z = 0;
             mouseUpPos = Input.mousePosition; //on stock la position de d'arrivée
-            Debug.Log("mouseUp:"+mouseUpPos);
-            //mouseUpPos = Camera.main.ScreenToWorldPoint(mouseUpPos);
+            mouseUpPos = Camera.main.ScreenToWorldPoint(mouseUpPos);
             mouseUpPos.z = 0;
-            mouseDownPos = Camera.main.WorldToScreenPoint(mouseDownPos);
+            //mouseDownPos = Camera.main.WorldToScreenPoint(mouseDownPos);
             //mouseUpPos.y = 0;
             shoot = false;
             dist = Vector3.Distance(mouseDownPos, mouseUpPos);
-            Debug.Log("mDownPos:"+mouseDownPos+" mUpPos"+mouseUpPos);
             if (dist > distanceMax)
             {
                 dist = distanceMax;
             }
             if (dist > 3)
             {
+                transform.GetComponent<SpriteRenderer>().enabled = false;
                 action = true;
                 var direction = mouseDownPos - mouseUpPos;
-                Debug.Log("distance:" + dist + " direction:" + direction);
-                transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force * Time.deltaTime);
+                transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force);
 
                 //transform.parent.GetComponent<Player>().startTypeZone = transform.parent.GetComponent<Player>().currentTypeZone;
                 //StartCoroutine(Wait(0.1f));
