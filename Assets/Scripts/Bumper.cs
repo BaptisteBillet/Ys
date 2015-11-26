@@ -6,6 +6,8 @@ public class Bumper : MonoBehaviour {
     Vector3 playerPosition;
     Vector3 dir;
 
+    public Animator m_Animator;
+
     public float puissance = 10;
 	// Use this for initialization
 	void Start () {
@@ -25,7 +27,8 @@ public class Bumper : MonoBehaviour {
     {
         if (player.gameObject.tag == "Player")
         {
-            
+
+            m_Animator.SetTrigger("Bumper");
             
             playerPosition = new Vector3(player.transform.position.x, player.transform.position.y, 0.0f);
             Bump(player.gameObject, playerPosition);
