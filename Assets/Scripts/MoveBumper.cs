@@ -9,6 +9,7 @@ public class MoveBumper : MonoBehaviour {
     Vector3 collisionPosition;
 
     public GameObject Canvas;
+    public Animator m_Animator;
 
 	// Use this for initialization
 	void Start () {
@@ -78,6 +79,7 @@ public class MoveBumper : MonoBehaviour {
             {
                 if (hit.collider.GetComponent<MoveBumper>())
                 {
+                    m_Animator.SetTrigger("Close");
                     onBumper = true;
                     GameManagerScript.instance.panelbumper.SetActive(false);
                     Vector3 bumperPos = Input.mousePosition;
@@ -93,6 +95,7 @@ public class MoveBumper : MonoBehaviour {
         }
         else if (Input.GetMouseButtonUp(0) && onBumper && collisionCount ==0)
         {
+            m_Animator.SetTrigger("Open");
             onBumper = false;
             GameManagerScript.instance.panelbumper.SetActive(true);
         }
@@ -103,6 +106,7 @@ public class MoveBumper : MonoBehaviour {
     public void validMove()
     {
         GameObject player = GameManagerScript.instance.getPlayer(GameManagerScript.instance.getCurrentID());
+        m_Animator.SetTrigger("Close");
         GameManagerScript.instance.panelbumper.SetActive(false);
         player.GetComponent<Player>().actionReady = false;
         transform.GetComponent<MoveBumper>().enabled = false;

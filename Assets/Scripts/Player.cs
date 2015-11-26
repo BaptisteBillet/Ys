@@ -168,7 +168,10 @@ public partial class Player : MonoBehaviour {
         transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         foreach (Transform child in transform)
         {
-            child.gameObject.SetActive(turn);
+            //child.gameObject.SetActive(turn);
+            transform.GetChild(0).gameObject.SetActive(turn);
+            transform.GetChild(1).gameObject.SetActive(turn);
+            transform.GetChild(2).gameObject.SetActive(turn);
         }
         if (turn)
         {
