@@ -49,7 +49,7 @@ public class GameManagerScript : MonoBehaviour {
         {
             if (!launch)
             {
-                StartCoroutine(LaunchGame(3.0f));
+                StartCoroutine(LaunchGame(0.2f));
             }
             
         } 
@@ -95,12 +95,12 @@ public class GameManagerScript : MonoBehaviour {
         /*************/
         while(currentTime < time)
         {
-            if (currentTime == 1.0f)
+            if (currentTime == 0.1f)
             {
                 OtherPlayer.GetComponentInChildren<SpriteRenderer>().enabled = false;
             }
-            currentTime += 1.0f;
-            yield return new WaitForSeconds(1.0f);
+            currentTime += 0.1f;
+            yield return new WaitForSeconds(0.1f);
         }
         
         Debug.Log(StartPlayer.name + "Start");
@@ -216,7 +216,7 @@ public class GameManagerScript : MonoBehaviour {
     void playerStartPosition()
     {
         // Les joueurs choissisent leurs positions
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !launch)
         {
             //Debug.Log("TOUCH");
             Vector3 pos = Input.mousePosition;    //screenPos to worldPos of mousePos
