@@ -47,6 +47,7 @@ public class SlingshotMenu : MonoBehaviour {
                         break;
                     case "OptionCollider":
                         Debug.Log("option");
+                        Application.LoadLevelAsync("Menu_Option");
                         break;
                     case "CreditCollider":
                         creditPanel.SetActive(true);
