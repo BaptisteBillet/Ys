@@ -5,10 +5,12 @@ public class SlingshotMenu : MonoBehaviour {
     Vector3 startPos;
     Vector3 mouseDownPos, mouseUpPos;
     GameObject creditPanel;
+    GameObject optionPanel;
     public float dist = 2;
     public bool shoot = false;
     public bool action = false;
     public float force ;
+    bool isOnMenu = false;
     public float distanceMax = 7;
     bool isSlingShotting = false;
     LineRenderer lineRenderer;
@@ -20,6 +22,8 @@ public class SlingshotMenu : MonoBehaviour {
         startPos = transform.position;
         creditPanel = GameObject.Find("CreditPanel");
         creditPanel.SetActive(false);
+        optionPanel = GameObject.Find("OptionPanel");
+        optionPanel.SetActive(false);
         force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
@@ -47,10 +51,12 @@ public class SlingshotMenu : MonoBehaviour {
                         break;
                     case "OptionCollider":
                         Debug.Log("option");
-                        Application.LoadLevelAsync("Menu_Option");
+                        optionPanel.SetActive(true);
+                        isOnMenu = true;
                         break;
                     case "CreditCollider":
                         creditPanel.SetActive(true);
+                        isOnMenu = true;
                         break;
                     case "QuitCollider":
                         Application.Quit();
@@ -68,7 +74,17 @@ public class SlingshotMenu : MonoBehaviour {
         transform.parent.position = startPos;
         creditPanel.SetActive(false);
         transform.GetComponent<SpriteRenderer>().enabled = true;
+        isOnMenu = false;
         
+    }
+
+    public void quitOptionPanel()
+    {
+        transform.parent.position = startPos;
+        optionPanel.SetActive(false);
+        transform.GetComponent<SpriteRenderer>().enabled = true;
+        isOnMenu = false;
+
     }
 
     void FixedUpdate()
@@ -122,7 +138,7 @@ public class SlingshotMenu : MonoBehaviour {
             mouseDownPos = transform.parent.position;
 
         }*/
-        if (!action)
+        if (!action&& !isOnMenu)
         {
             shoot = true;
             isSlingShotting = true;
@@ -135,7 +151,7 @@ public class SlingshotMenu : MonoBehaviour {
     void OnMouseUp()
     {
         isSlingShotting = false;
-        if (!action)
+        if (!action && !isOnMenu)
         {
             mouseDownPos.z = 0;
             mouseUpPos = Input.mousePosition; //on stock la position de d'arrivée
