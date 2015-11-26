@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class SlingshotMenu : MonoBehaviour {
-    
+    Vector3 startPos;
     Vector3 mouseDownPos, mouseUpPos;
+    GameObject creditPanel;
     public float dist = 2;
     public bool shoot = false;
     public bool action = false;
@@ -16,6 +17,9 @@ public class SlingshotMenu : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
+        startPos = transform.position;
+        creditPanel = GameObject.Find("CreditPanel");
+        creditPanel.SetActive(false);
         force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
@@ -45,7 +49,7 @@ public class SlingshotMenu : MonoBehaviour {
                         Debug.Log("option");
                         break;
                     case "CreditCollider":
-                        Debug.Log("credit");
+                        creditPanel.SetActive(true);
                         break;
                     case "QuitCollider":
                         Application.Quit();
@@ -57,6 +61,14 @@ public class SlingshotMenu : MonoBehaviour {
             }
         }
 	}
+
+    public void quitCreditPanel()
+    {
+        transform.parent.position = startPos;
+        creditPanel.SetActive(false);
+        transform.GetComponent<SpriteRenderer>().enabled = true;
+        
+    }
 
     void FixedUpdate()
     {
