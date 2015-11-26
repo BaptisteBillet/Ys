@@ -7,6 +7,9 @@ public class MoveBumper : MonoBehaviour {
     bool onBumper = false;
     public int collisionCount;
     Vector3 collisionPosition;
+
+    public GameObject Canvas;
+
 	// Use this for initialization
 	void Start () {
         onBumper = false;
@@ -59,9 +62,14 @@ public class MoveBumper : MonoBehaviour {
         
     }
 	
+
+
 	// Update is called once per frame
 	void Update () {
-        
+
+        Canvas.transform.LookAt(Vector3.zero, Canvas.transform.up);
+
+
 	    if(Input.GetMouseButton(0))
         {
             
