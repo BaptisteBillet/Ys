@@ -4,11 +4,11 @@ using System.Collections;
 public class SlingshotMenu : MonoBehaviour {
 
     Vector3 mouseDownPos, mouseUpPos;
-    public float dist = 0;
+    public float dist = 2;
     public bool shoot = false;
     public bool action = false;
-    public float force = 10;
-    public float distanceMax = 4;
+    public float force = 5;
+    public float distanceMax = 7;
     bool isSlingShotting = false;
     LineRenderer lineRenderer;
     Vector3 velocity;
@@ -55,7 +55,7 @@ public class SlingshotMenu : MonoBehaviour {
         lineRenderer.SetPosition(0, new Vector3(cursorPos.x, cursorPos.y, 0.0f));
         Vector3 direction = mousePosInWorld - cursorPos;
         direction.Normalize();
-
+        Debug.Log(dist);
         direction = Vector3.ClampMagnitude(direction, 1.0f);
         direction.z = 0;
         if (dist > distanceMax)
@@ -115,7 +115,7 @@ public class SlingshotMenu : MonoBehaviour {
                 action = true;
                 var direction = mouseDownPos - mouseUpPos;
                 Debug.Log("distance:" + dist + " direction:" + direction);
-                transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force*Time.deltaTime);
+                transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force * Time.deltaTime);
 
                 //transform.parent.GetComponent<Player>().startTypeZone = transform.parent.GetComponent<Player>().currentTypeZone;
                 //StartCoroutine(Wait(0.1f));
