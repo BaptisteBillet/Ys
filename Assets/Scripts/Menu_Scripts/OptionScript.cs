@@ -3,13 +3,20 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class OptionScript : MonoBehaviour {
-
+    GameObject optionPanel;
     static OptionScript mInst;
     static public OptionScript instance { get { return mInst; } }
     void Awake()
     {
         if (mInst == null) mInst = this;
         DontDestroyOnLoad(this);
+    }
+
+    void Start()
+    {
+        Debug.Log("start");
+        optionPanel = GameObject.Find("OptionPanel");
+        optionPanel.SetActive(false);
     }
 
     public Slider musicSlider;
@@ -56,7 +63,23 @@ public class OptionScript : MonoBehaviour {
 
     public void Quit()
     {
+        Debug.Log("quit");
         Application.Quit();
+    }
+
+    public void activeOptionMenu()
+    {
+        optionPanel.SetActive(true);
+    }
+
+    public void retry()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void back()
+    {
+        optionPanel.SetActive(false);
     }
 
 }
