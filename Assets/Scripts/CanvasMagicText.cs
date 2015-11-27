@@ -4,6 +4,26 @@ using UnityEngine.UI;
 
 public class CanvasMagicText : MonoBehaviour {
 
+	#region Singleton
+	static private CanvasMagicText s_Instance;
+	static public CanvasMagicText instance
+	{
+		get
+		{
+			return s_Instance;
+		}
+	}
+	
+	
+	
+	void Awake()
+	{
+		if (s_Instance == null)
+			s_Instance = this;
+		//DontDestroyOnLoad(this);
+	}
+	#endregion
+
 	public Text m_Text1;
 	public Text m_Text2;
 	public Text m_Text3;

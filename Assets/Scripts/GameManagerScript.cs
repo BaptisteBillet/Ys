@@ -265,9 +265,18 @@ public class GameManagerScript : MonoBehaviour {
 		if(p1Turn)
 		{
 			currentId = 1;
+
+			CanvasMagicText.instance.ChangeText("Your Turn Bear");
+
+
 		}else{
 			currentId = 2;
+			CanvasMagicText.instance.ChangeText("Your Turn Lion");
 		}
+
+		CanvasMagicText.instance.AppearText();
+		CanvasMagicText.instance.HideText(3);
+
         scriptP1.setTurn(p1Turn);
         scriptP2.setTurn(!p1Turn);
     }
