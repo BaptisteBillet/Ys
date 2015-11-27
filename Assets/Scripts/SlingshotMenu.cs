@@ -140,9 +140,11 @@ public class SlingshotMenu : MonoBehaviour {
 
     void FixedUpdate()
     {
+        Debug.Log("test");
         if (Input.GetMouseButton(0) && shoot && isSlingShotting) // si le joueur est en train de tirer
         {
             // on scale la jauge de puissance en fonction de la distance
+            Debug.Log("ScaleJauge");
             ScaleJauge();
         }
     }
@@ -172,9 +174,7 @@ public class SlingshotMenu : MonoBehaviour {
         {
             lineRenderer.SetColors(Color.red, Color.red);
         }
-        lineRenderer.SetPosition(1, cursorPos + (direction * dist));
-
-        lineRenderer.sortingOrder = 2;
+        
         
     }
 
