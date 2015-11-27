@@ -96,7 +96,6 @@ public class ejection : MonoBehaviour
 
             player = hit.collider.GetComponent<Player>();
 
-            print(hit.collider.name);
             // attack
             if (isMaybeDoubleTapping)
             {

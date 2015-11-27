@@ -65,6 +65,7 @@ public class GameManagerScript : MonoBehaviour {
                 gameRunning();
                 break;
             case STATE.END:
+
                 break;
             default: 
                 break;
@@ -104,7 +105,7 @@ public class GameManagerScript : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
         }
         
-        Debug.Log(StartPlayer.name + "Start");
+
         //StartPlayer.GetComponentInChildren<SpriteRenderer>().enabled = true;
         state = STATE.RUN;
         
@@ -184,17 +185,22 @@ public class GameManagerScript : MonoBehaviour {
         state = STATE.END;
         scriptP1.setTurn(false);
         scriptP2.setTurn(false);
-        if(LoserID == 1)
+        currentId = 0;
+        if (LoserID == 1)
         {
             Debug.Log("P2 WIN");
-			m_Victory.IsLionWin(false);
+            PlayerPrefs.SetInt("Winner", 1);
+
         }
         else
         {
             Debug.Log("P1 WIN");
-			m_Victory.IsLionWin(true);
+            PlayerPrefs.SetInt("Winner", 2);
+
         }
+        Application.LoadLevelAsync("VictoryScene");
     }
+
 
     public GameObject getPlayer(int ID)
     {
