@@ -265,9 +265,18 @@ public class GameManagerScript : MonoBehaviour {
 		if(p1Turn)
 		{
 			currentId = 1;
+
+			CanvasMagicText.instance.ChangeText("Your Turn Bear");
+
+
 		}else{
 			currentId = 2;
+			CanvasMagicText.instance.ChangeText("Your Turn Lion");
 		}
+
+		CanvasMagicText.instance.AppearText();
+		CanvasMagicText.instance.HideText(3);
+
         scriptP1.setTurn(p1Turn);
         scriptP2.setTurn(!p1Turn);
     }
@@ -323,6 +332,7 @@ public class GameManagerScript : MonoBehaviour {
                     Player1.name = "Player1";
                     scriptP1 = Player1.GetComponent<Player>();
                     scriptP1.setID(1);
+                    scriptP1.ChangeAnimal(false);
                 }
                 else
                 {
@@ -349,6 +359,7 @@ public class GameManagerScript : MonoBehaviour {
                     Player2.name = "Player2";
                     scriptP2 = Player2.GetComponent<Player>();
                     scriptP2.setID(2);
+                    scriptP2.ChangeAnimal(true);
                 }
                 else
                 {

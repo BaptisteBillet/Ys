@@ -31,7 +31,7 @@ public class SlingshotMenu : MonoBehaviour {
 	void Start () {
         startPos = transform.position;
 
-        force = 15;
+        force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
@@ -149,7 +149,7 @@ public class SlingshotMenu : MonoBehaviour {
         Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorPos = transform.position;
         mousePosInWorld.z = 0;
-        
+
         dist = Vector3.Distance(new Vector3(cursorPos.x, cursorPos.y, 0.0f), new Vector3(mousePosInWorld.x, mousePosInWorld.y, 0.0f));
         lineRenderer.SetPosition(0, new Vector3(cursorPos.x, cursorPos.y, 0.0f));
         Vector3 direction = mousePosInWorld - cursorPos;
@@ -162,15 +162,12 @@ public class SlingshotMenu : MonoBehaviour {
         }
         if (dist > 3)
         {
-            Debug.Log(mousePosInWorld);
             lineRenderer.SetColors(Color.yellow, Color.yellow);
-            
         }
         else
         {
             lineRenderer.SetColors(Color.red, Color.red);
         }
-        lineRenderer.SetPosition(1, transform.position + (direction * dist));
         
         
     }
