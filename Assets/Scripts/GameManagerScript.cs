@@ -75,7 +75,12 @@ public class GameManagerScript : MonoBehaviour {
         }
 	}
 
-
+    public void resetGame()
+    {
+        state = STATE.START;
+        currentId = 0;
+        Time.timeScale = 1f;
+    }
     
     public void setPauseGame(bool pauseGame)
     {

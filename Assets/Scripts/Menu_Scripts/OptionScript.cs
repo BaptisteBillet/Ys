@@ -81,6 +81,7 @@ public class OptionScript : MonoBehaviour {
     public void retry()
     {
         Application.LoadLevel(Application.loadedLevel);
+        GameManagerScript.instance.resetGame();
     }
 
     public void back()
