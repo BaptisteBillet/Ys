@@ -33,12 +33,12 @@ public class HUDManager : Singleton<HUDManager> {
         if(ID == 1)
         {
             player1GO = player;
-            p1Life.transform.parent = player1GO.transform;
+            //p1Life.transform.parent = player1GO.transform;
         }
         else
         {
             player2GO = player;
-            p2Life.transform.parent = player2GO.transform;
+            //p2Life.transform.parent = player2GO.transform;
         }
     }
 
@@ -125,8 +125,8 @@ public class HUDManager : Singleton<HUDManager> {
             for (int i = 0; i < Life;i++ )
             {
                 cache = (GameObject)Instantiate(LifePoint, new Vector3((i * 0.4f), 0, 0), Quaternion.identity);
-                cache.transform.parent = p1Life.transform;
-                p1LifePoints.Add(cache);
+                //cache.transform.parent = p1Life.transform;
+                //p1LifePoints.Add(cache);
             }
         }
         else
@@ -139,8 +139,8 @@ public class HUDManager : Singleton<HUDManager> {
             for (int i = 0; i < Life; i++)
             {
                 cache = (GameObject)Instantiate(LifePoint, new Vector3((i * 0.4f), 0, 0), Quaternion.identity);
-                cache.transform.parent = p2Life.transform;
-                p2LifePoints.Add(cache);
+                //cache.transform.parent = p2Life.transform;
+                //p2LifePoints.Add(cache);
                 
             }
         }
