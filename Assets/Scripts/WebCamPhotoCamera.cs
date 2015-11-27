@@ -13,9 +13,21 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     Texture2D photo;
 
+	public Sprite Lion;
+	public Sprite Bear;
+
+	public Image Winner;
 
     void Start()
     {
+		if(PlayerPrefs.GetInt("Win",2)==1)
+		{
+			Winner.sprite=Bear;
+		}
+		else
+		{
+			Winner.sprite=Lion;
+		}
 
         webCamTexture = new WebCamTexture("Camera 1");
         //webCamTexture = new WebCamTexture();
@@ -79,13 +91,23 @@ public class WebCamPhotoCamera : MonoBehaviour
 
     }
 
-   
+   public void TouchOk()
+	{
+		if (m_PhotoMode) {
+			ChangeMode();
+		} else {
+			Application.LoadLevel (0);
+		}
+	}
 
-    void OnMouseDown()
-    {
-
-        ChangeMode();
-    }
+	public void TouchNo()
+	{
+		if (m_PhotoMode) {
+			Application.LoadLevel (0);
+		} else {
+			ChangeMode();
+		}
+	}
    
    
 }
