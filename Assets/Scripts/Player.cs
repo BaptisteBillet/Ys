@@ -224,7 +224,6 @@ public partial class Player : MonoBehaviour {
             //child.gameObject.SetActive(turn);
             transform.GetChild(0).gameObject.SetActive(turn);
             transform.GetChild(1).gameObject.SetActive(turn);
-            transform.GetChild(2).gameObject.SetActive(turn);
         }
         if (turn)
         {

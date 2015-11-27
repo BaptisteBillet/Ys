@@ -8,7 +8,7 @@ public class SlingShot : MonoBehaviour {
     Vector3 mouseDownPos;
     
 
-    public lineDraw scriptAim;
+    //public lineDraw scriptAim;
 
     float dist;
     public float distanceMax = 6;
@@ -27,6 +27,8 @@ public class SlingShot : MonoBehaviour {
     bool isOnPlayer = false;
 
     bool isCircleAlreadyAppear=false;
+
+    /*******UI*******/
 
 	// Use this for initialization
 	void Start () {
@@ -86,22 +88,17 @@ public class SlingShot : MonoBehaviour {
     {
         if (myID == GameManagerScript.instance.currentId && Input.GetMouseButton(0) && shoot && !transform.parent.GetComponent<Player>().isMaybeDoubleTapping && isSlingShotting && !isOnPlayer) // si le joueur est en train de tirer
         {
-            scriptAim.changeIsAim(true);
+            //scriptAim.changeIsAim(true);
             // on scale la jauge de puissance en fonction de la distance
             ScaleJauge();
         }
         else
         {
-            scriptAim.changeIsAim(false);
+            //scriptAim.changeIsAim(false);
         }
     }
     void ScaleJauge()
     {
-
-
-
-
-
         lineRenderer.enabled = true;
         Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosInWorld.z = 0;
