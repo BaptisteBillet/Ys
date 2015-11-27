@@ -206,7 +206,7 @@ public class SlingShot : MonoBehaviour {
 
                 transform.parent.GetComponent<Player>().startTypeZone = transform.parent.GetComponent<Player>().currentTypeZone;
                 StartCoroutine(Wait(0.1f));
-
+                ShakeManager.instance.LetsShake(7);
             }
             else
             {
