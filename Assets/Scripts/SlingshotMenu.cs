@@ -37,11 +37,24 @@ public class SlingshotMenu : MonoBehaviour {
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
 	}
+
+    void reset()
+    {
+        transform.parent.position = startPos;
+        creditPanel.SetActive(false);
+        transform.GetComponent<SpriteRenderer>().enabled = true;
+        isOnMenu = false;
+        titlePanel.SetActive(true);
+    }
 	
 	// Update is called once per frame
 	void Update () {
         velocity = transform.GetComponentInParent<Rigidbody>().velocity;
         playerSpeed = velocity.magnitude;
+        if(Input.GetMouseButtonDown(0))
+        {
+            //afk
+        }
         if (playerSpeed <= 0.5f && !shoot)
         {
             action = false;
@@ -83,10 +96,9 @@ public class SlingshotMenu : MonoBehaviour {
             {
                 if (hit.collider != null && hit.collider.name =="PlayCollider")
                 {
-                    transform.parent.position = startPos;
+                    reset();
                     inMainMenu = false;
                     mainTitle.SetActive(false);
-                    titlePanel.SetActive(true);
                 }
             }
         }
@@ -94,22 +106,14 @@ public class SlingshotMenu : MonoBehaviour {
 
     public void quitCreditPanel()
     {
-        transform.parent.position = startPos;
+        reset();
         creditPanel.SetActive(false);
-        transform.GetComponent<SpriteRenderer>().enabled = true;
-        isOnMenu = false;
-        titlePanel.SetActive(true);
-        
     }
 
     public void quitOptionPanel()
     {
-        transform.parent.position = startPos;
+        reset();
         optionPanel.SetActive(false);
-        transform.GetComponent<SpriteRenderer>().enabled = true;
-        isOnMenu = false;
-        titlePanel.SetActive(true);
-
     }
 
     void FixedUpdate()
