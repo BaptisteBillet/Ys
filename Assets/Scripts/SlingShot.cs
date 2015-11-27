@@ -206,6 +206,10 @@ public class SlingShot : MonoBehaviour {
                 var direction = mouseDownPos - mouseUpPos;
                 transform.parent.GetComponent<Rigidbody>().AddForce(direction * dist * force);
 
+				CanvasMagicText.instance.ChangeText("Tap for Spell");
+				CanvasMagicText.instance.AppearText();
+				CanvasMagicText.instance.HideText(3);
+
                 transform.parent.GetComponent<Player>().startTypeZone = transform.parent.GetComponent<Player>().currentTypeZone;
                 StartCoroutine(Wait(0.1f));
                 ShakeManager.instance.LetsShake(7);
