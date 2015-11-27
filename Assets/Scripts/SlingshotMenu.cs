@@ -4,10 +4,10 @@ using System.Collections;
 public class SlingshotMenu : MonoBehaviour {
     Vector3 startPos;
     Vector3 mouseDownPos, mouseUpPos;
-    GameObject creditPanel;
-    GameObject optionPanel;
-    GameObject mainTitle;
-    GameObject titlePanel;
+    public GameObject creditPanel;
+	public GameObject optionPanel;
+	public GameObject mainTitle;
+	public GameObject titlePanel;
     public float dist = 2;
     public bool shoot = false;
     public bool action = false;
@@ -20,22 +20,23 @@ public class SlingshotMenu : MonoBehaviour {
     Vector3 velocity;
     float playerSpeed;
     
+	public Animator m_TitleAnimator;
+	public Animator m_ChoiceAnimator;
+
+	private bool m_IsFirstTime=false;
+
 	// Use this for initialization
 	void Start () {
         inMainMenu = true;
         startPos = transform.position;
-        creditPanel = GameObject.Find("CreditPanel");
-        creditPanel.SetActive(false);
-        optionPanel = GameObject.Find("OptionPanel");
-        optionPanel.SetActive(false);
-        titlePanel = GameObject.Find("TitlePanel");
-        titlePanel.SetActive(false);
-        mainTitle = GameObject.Find("MainTitleImage");
-        mainTitle.SetActive(true);
+
         force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
+
+		m_TitleAnimator.SetTrigger ("Open");
+
 	}
 
     void reset()
@@ -169,6 +170,14 @@ public class SlingshotMenu : MonoBehaviour {
         }*/
         if (!action&& !isOnMenu)
         {
+
+			if(m_IsFirstTime==false)
+			{
+				m_IsFirstTime=true;
+				m_ChoiceAnimator.SetTrigger("Open");
+				m_TitleAnimator.SetTrigger("Close");
+			}
+
             shoot = true;
             isSlingShotting = true;
             transform.parent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
