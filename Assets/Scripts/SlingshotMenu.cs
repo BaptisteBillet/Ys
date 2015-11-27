@@ -90,7 +90,7 @@ public class SlingshotMenu : MonoBehaviour {
                     {
                         case "PlayCollider":
                             Debug.Log("play");
-                            Application.LoadLevelAsync("test");
+                            Application.LoadLevelAsync("William");
                             break;
                         case "OptionCollider":
                             Debug.Log("option");
