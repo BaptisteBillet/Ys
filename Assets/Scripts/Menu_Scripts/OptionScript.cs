@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class OptionScript : MonoBehaviour {
-    GameObject optionPanel;
+    public GameObject optionPanel;
     static OptionScript mInst;
     bool isInGame = false;
     static public OptionScript instance { get { return mInst; } }
@@ -17,12 +17,12 @@ public class OptionScript : MonoBehaviour {
     void Start()
     {
         Debug.Log("start");
-        if (isInGame)
+        if (optionPanel==null)
         {
             optionPanel = GameObject.Find("OptionPanel");
-            optionPanel.SetActive(false);
+            
         }
-        
+        optionPanel.SetActive(false);
     }
 
     public Slider musicSlider;
@@ -86,6 +86,12 @@ public class OptionScript : MonoBehaviour {
     public void back()
     {
         optionPanel.SetActive(false);
+    }
+
+    public void setActiveOptionInGame(bool setValue)
+    {
+        optionPanel.SetActive(setValue);                    // active menu option
+        GameManagerScript.instance.setPauseGame(setValue); // pause le jeu
     }
 
 }

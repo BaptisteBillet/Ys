@@ -133,7 +133,7 @@ public class SlingShot : MonoBehaviour {
         }
         lineRenderer.SetPosition(1, transform.position + (direction * dist));
 
-        headImage.transform.LookAt(transform.position + (direction));
+        headImage.transform.LookAt(mousePosInWorld);
         Quaternion rot = headImage.transform.rotation;
         headImage.transform.rotation = new Quaternion(rot.x, rot.y, 0f, 0f);
         

@@ -7,7 +7,8 @@ public class GameManagerScript : MonoBehaviour {
         MENU,
         START,
         RUN,
-        END
+        END,
+        PAUSE,
 
     }; 
 
@@ -28,10 +29,11 @@ public class GameManagerScript : MonoBehaviour {
 
     public GameObject PlayerPrefab;
     public STATE state;
+    STATE lastState;
     public bool p1Turn;
 	public int currentId;
     bool launch= false;
-
+    int lastCurrentID=0;
 	public Victory m_Victory;
 
     /****UI***/
@@ -46,6 +48,7 @@ public class GameManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (Player1 != null && Player2 != null && state == STATE.START)
         {
             if (!launch)
@@ -70,6 +73,27 @@ public class GameManagerScript : MonoBehaviour {
                 break;
         }
 	}
+
+
+    
+    public void setPauseGame(bool pauseGame)
+    {
+        if (pauseGame)
+        {
+            lastState = state;
+            //OptionScript.instance.setActiveOptionInGame(true);
+            state = STATE.MENU;
+            lastCurrentID = currentId;
+            currentId = 0;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            state = lastState;
+            currentId = lastCurrentID;
+            Time.timeScale = 1f;
+        }
+    }
 
     /************ modif **************/
     IEnumerator LaunchGame(float time)
