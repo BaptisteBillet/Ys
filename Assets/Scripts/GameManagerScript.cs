@@ -174,6 +174,25 @@ public class GameManagerScript : MonoBehaviour {
         return value;
     }
 
+
+    // called by the loser player
+    // End the game and show victory screen
+    public void endGame(int LoserID)
+    {
+        state = STATE.END;
+        scriptP1.setTurn(false);
+        scriptP2.setTurn(false);
+        if(LoserID == 1)
+        {
+            Debug.Log("P2 WIN");
+
+        }
+        else
+        {
+            Debug.Log("P1 WIN");
+        }
+    }
+
     public GameObject getPlayer(int ID)
     {
         if (ID == 1)
@@ -251,8 +270,6 @@ public class GameManagerScript : MonoBehaviour {
                     Player1.name = "Player1";
                     scriptP1 = Player1.GetComponent<Player>();
                     scriptP1.setID(1);
-                    HUDManager.Instance.setPlayer(1, Player1);
-                    HUDManager.Instance.setLifeUI(1, scriptP1.getLife());
                 }
                 else
                 {
@@ -279,8 +296,6 @@ public class GameManagerScript : MonoBehaviour {
                     Player2.name = "Player2";
                     scriptP2 = Player2.GetComponent<Player>();
                     scriptP2.setID(2);
-                    HUDManager.Instance.setPlayer(2, Player2);
-                    HUDManager.Instance.setLifeUI(2, scriptP2.getLife());
                 }
                 else
                 {
