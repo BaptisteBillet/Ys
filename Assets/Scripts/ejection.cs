@@ -58,7 +58,7 @@ public class ejection : MonoBehaviour
             otherPlayer.GetComponent<Player>().takeDamage(degat);
             ejectionAction = true;
             //StartCoroutine(waiting(0.1f));
-            Debug.Log("Attack " + otherPlayer.name);
+
 
             Object effect = Instantiate(EjectionEffect, this.transform.position, Quaternion.identity);
             Destroy(effect, 2f);

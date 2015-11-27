@@ -185,6 +185,7 @@ public partial class Player : MonoBehaviour {
                 Object effect = Instantiate(playerCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
                 Destroy(effect, 1f);
             }
+            powerUpEffect.SetActive(false);
             if (startTypeZone == TypeZone.TerrainType.PLAIN && countCollision == 0)
             {
                 collision.collider.GetComponent<Player>().takeDamage(this.Damage*2);
@@ -316,7 +317,7 @@ public partial class Player : MonoBehaviour {
     {
         health -= m_Damage;
         lifeBar.GetComponent<Image>().fillAmount = health / 100.0f;
-        Debug.Log(health);
+
                 
     }
 
