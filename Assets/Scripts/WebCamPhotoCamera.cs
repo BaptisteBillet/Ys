@@ -94,6 +94,7 @@ public class WebCamPhotoCamera : MonoBehaviour
    public void TouchOk()
 	{
 		if (m_PhotoMode) {
+			SoundManagerEvent.emit(SoundManagerType.PhotoClick);
 			ChangeMode();
 		} else {
 			Application.LoadLevel (0);
