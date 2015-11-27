@@ -20,6 +20,7 @@ public class SlingShot : MonoBehaviour {
     bool powerUp = false;
     public float force = 50;
     public GameObject cancelImage;
+    public GameObject headImage;
 	LineRenderer lineRenderer;
     RaycastHit hit;
     Player player;
@@ -112,6 +113,7 @@ public class SlingShot : MonoBehaviour {
 
         direction = Vector3.ClampMagnitude(direction, 1.0f);
         direction.z = 0;
+        
         if (dist > distanceMax)
         {
             dist = distanceMax;
@@ -124,12 +126,17 @@ public class SlingShot : MonoBehaviour {
         }
         else
         {
+            
             cancelImage.SetActive(true);
+            cancelImage.transform.position = mousePosInWorld;
             lineRenderer.SetColors(Color.red, Color.red);
         }
         lineRenderer.SetPosition(1, transform.position + (direction * dist));
-        
 
+        headImage.transform.LookAt(transform.position + (direction));
+        Quaternion rot = headImage.transform.rotation;
+        headImage.transform.rotation = new Quaternion(rot.x, rot.y, 0f, 0f);
+        
         
     }
 
