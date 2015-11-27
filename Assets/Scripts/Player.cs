@@ -291,10 +291,38 @@ public partial class Player : MonoBehaviour {
             if (currentTerrain != null)
             {
                 currentTerrain.GetComponent<TerrainEffectManager>().ActivateEffect();
+
+				switch(startTypeZone)
+				{
+				case TypeZone.TerrainType.BUMPER:
+					CanvasMagicText.instance.ChangeText("Move the Bumper");
+					CanvasMagicText.instance.AppearText();
+					CanvasMagicText.instance.HideText(3);
+					break;
+
+				case TypeZone.TerrainType.FOREST:
+					CanvasMagicText.instance.ChangeText("Bounce for Double damage");
+					CanvasMagicText.instance.AppearText();
+					CanvasMagicText.instance.HideText(3);
+					break;
+
+				case TypeZone.TerrainType.PLAIN:
+					CanvasMagicText.instance.ChangeText("Direct Hit for Double damage");
+					CanvasMagicText.instance.AppearText();
+					CanvasMagicText.instance.HideText(3);
+					break;
+
+				}
+
+
             }
 
             if (currentTypeZone == TypeZone.TerrainType.MOUNTAIN)
             {
+				CanvasMagicText.instance.ChangeText("Your have a Shield!");
+				CanvasMagicText.instance.AppearText();
+				CanvasMagicText.instance.HideText(3);
+
                 isShieldUp = true;
             }
         }
@@ -321,6 +349,9 @@ public partial class Player : MonoBehaviour {
         {
             // no dmg -> animation de blockage ?
             isShieldUp = false;
+			CanvasMagicText.instance.ChangeText("Shield Broke!");
+			CanvasMagicText.instance.AppearText();
+			CanvasMagicText.instance.HideText(3);
         }
         else
         {
