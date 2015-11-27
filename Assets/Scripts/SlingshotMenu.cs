@@ -168,7 +168,7 @@ public class SlingshotMenu : MonoBehaviour {
         {
             lineRenderer.SetColors(Color.red, Color.red);
         }
-        
+        lineRenderer.SetPosition(1, transform.position + (direction * dist));
         
     }
 
