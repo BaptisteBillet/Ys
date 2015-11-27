@@ -2,43 +2,48 @@
 using System.Collections;
 
 [RequireComponent(typeof (TypeZone))]
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class TerrainEffectManager : MonoBehaviour {
 
     //private TypeZone.TerrainType currentType;
     [SerializeField]
     private GameObject currentEffect;
 
+    private SpriteRenderer ZoneSprite;
+
+    [SerializeField]
+    private Color BaseColor = new Color(0.5f, 0.5f, 0.5f);
+
+    [SerializeField]
+    private Color HighlightColor = new Color(1f, 1f, 1f);
+
+    [SerializeField]
+    private float m_ColorChangeSpeed = 2f;
+
+    private Animator TerrainAnimator;
+
 
     // Use this for initializations
     void Start()
     {
-        /*
-        currentType = this.GetComponent<TypeZone>().terrainType;
+        ZoneSprite = this.GetComponent<SpriteRenderer>();
+        TerrainAnimator = this.GetComponent<Animator>();
 
-        switch (currentType)
-        {
-            case TypeZone.TerrainType.FOREST:
-                currentEffect = this.GetComponentInParent<TerrainEffectHolder>().forestTerrainEffect;
-                break;
-            case TypeZone.TerrainType.MOUNTAIN:
-                currentEffect = this.GetComponentInParent<TerrainEffectHolder>().mountainTerrainEffect;
-                break;
-
-            case TypeZone.TerrainType.BUMPER:
-                currentEffect = this.GetComponentInParent<TerrainEffectHolder>().bumperTerrainEffect;
-                break;
-            case TypeZone.TerrainType.PLAIN:
-                currentEffect = this.GetComponentInParent<TerrainEffectHolder>().plainTerrainEffect;
-                break;
-
-        }
-        */
+        ZoneSprite.color = BaseColor;
     }
 	
 
     public void ActivateEffect()
     {
-        if(currentEffect != null)
+        StartCoroutine("LerpEffects");
+
+        ZoneSprite.sortingOrder = 1;
+
+        TerrainAnimator.SetTrigger("ScaleUpnDown");
+
+
+        if (currentEffect != null)
         {
             currentEffect.SetActive(true);
 
@@ -53,8 +58,12 @@ public class TerrainEffectManager : MonoBehaviour {
     public void KillEffect()
     {
 
-        Debug.Log("quitting");
+        ZoneSprite.color = BaseColor;
 
+        ZoneSprite.sortingOrder = 0;
+
+
+        //StartCoroutine()
         if (currentEffect != null)
         {
             currentEffect.SetActive(false);
@@ -62,6 +71,16 @@ public class TerrainEffectManager : MonoBehaviour {
         else
         {
             Debug.Log("No Terrain Effect Attached");
+        }
+    }
+    
+    IEnumerator LerpEffects()
+    {
+        while (ZoneSprite.color != HighlightColor)
+        {
+            ZoneSprite.color = new Color(ZoneSprite.color.r + 0.1f, ZoneSprite.color.g + 0.1f, ZoneSprite.color.b + 0.1f);
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
