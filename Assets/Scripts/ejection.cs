@@ -46,11 +46,22 @@ public class ejection : MonoBehaviour
     void attackCAC()
     {
         
-
         otherPlayer = GameManagerScript.instance.getOtherPlayer(player.ID);
         doubleTap = true;
         if (Vector3.Distance(otherPlayer.transform.position, this.transform.position) < RangeAttackCAC + (otherPlayer.transform.localScale.x / 2)&&!ejectionAction && !transform.parent.GetComponentInChildren<SlingShot>().action)
         {
+
+			if(player.ID==1)
+			{
+				SoundManagerEvent.emit(SoundManagerType.DoubleTapBear);
+			}
+			else
+			{
+				SoundManagerEvent.emit(SoundManagerType.DoubleTapLion);
+			}
+
+
+
             //attackCac = true;
             otherPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
             Vector3 direction = otherPlayer.transform.position - this.transform.position;
