@@ -174,7 +174,7 @@ public class SlingshotMenu : MonoBehaviour {
         }
         lineRenderer.SetPosition(1, cursorPos + (direction * dist));
 
-
+        lineRenderer.sortingOrder = 2;
         
     }
 
