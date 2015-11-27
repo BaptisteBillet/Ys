@@ -296,13 +296,12 @@ public partial class Player : MonoBehaviour {
             else
             {
                 Debug.Log("Player "+ID+" lost");
-
+                GameManagerScript.instance.endGame(ID);
                 Object effect = Instantiate(destroyedEffect, this.transform.position, Quaternion.identity);
                 Destroy(effect, 2f);
                 
                 // mort
             }
-            //HUDManager.Instance.updateLife(this.ID, health);
         }
     }
 
