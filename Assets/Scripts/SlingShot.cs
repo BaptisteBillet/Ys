@@ -19,7 +19,7 @@ public class SlingShot : MonoBehaviour {
     bool isSlingShotting = false;
     bool powerUp = false;
     public float force = 50;
-
+    public GameObject cancelImage;
 	LineRenderer lineRenderer;
     RaycastHit hit;
     Player player;
@@ -41,6 +41,7 @@ public class SlingShot : MonoBehaviour {
 		lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
 		lineRenderer.enabled = false;
         player = transform.parent.gameObject.GetComponent<Player>();
+        cancelImage.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -94,6 +95,7 @@ public class SlingShot : MonoBehaviour {
         }
         else
         {
+            cancelImage.SetActive(false);
             //scriptAim.changeIsAim(false);
         }
     }
@@ -117,10 +119,12 @@ public class SlingShot : MonoBehaviour {
 
         if (dist > 3)
         {
+            cancelImage.SetActive(false);
             lineRenderer.SetColors(Color.yellow, Color.yellow);
         }
         else
         {
+            cancelImage.SetActive(true);
             lineRenderer.SetColors(Color.red, Color.red);
         }
         lineRenderer.SetPosition(1, transform.position + (direction * dist));
