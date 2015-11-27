@@ -6,9 +6,12 @@ public class SlingshotMenu : MonoBehaviour {
     Vector3 mouseDownPos, mouseUpPos;
     GameObject creditPanel;
     GameObject optionPanel;
+    GameObject mainTitle;
+    GameObject titlePanel;
     public float dist = 2;
     public bool shoot = false;
     public bool action = false;
+    bool inMainMenu = true;
     public float force ;
     bool isOnMenu = false;
     public float distanceMax = 7;
@@ -19,11 +22,16 @@ public class SlingshotMenu : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
+        inMainMenu = true;
         startPos = transform.position;
         creditPanel = GameObject.Find("CreditPanel");
         creditPanel.SetActive(false);
         optionPanel = GameObject.Find("OptionPanel");
         optionPanel.SetActive(false);
+        titlePanel = GameObject.Find("TitlePanel");
+        titlePanel.SetActive(false);
+        mainTitle = GameObject.Find("MainTitleImage");
+        mainTitle.SetActive(true);
         force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
@@ -41,29 +49,44 @@ public class SlingshotMenu : MonoBehaviour {
             int layer = 1 << 20;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, Mathf.Infinity, layer);
             Debug.DrawRay(transform.position, Vector3.forward, Color.red);
-            if (hit.collider != null)
+            if (!inMainMenu)
             {
-                switch(hit.collider.name)
+                if (hit.collider != null)
                 {
-                    case "PlayCollider":
-                        Debug.Log("play");
-                        Application.LoadLevelAsync("test");
-                        break;
-                    case "OptionCollider":
-                        Debug.Log("option");
-                        optionPanel.SetActive(true);
-                        isOnMenu = true;
-                        break;
-                    case "CreditCollider":
-                        creditPanel.SetActive(true);
-                        isOnMenu = true;
-                        break;
-                    case "QuitCollider":
-                        Application.Quit();
-                        break;
-                    default:
-                        Debug.Log("other");
-                        break;
+                    switch (hit.collider.name)
+                    {
+                        case "PlayCollider":
+                            Debug.Log("play");
+                            Application.LoadLevelAsync("test");
+                            break;
+                        case "OptionCollider":
+                            Debug.Log("option");
+                            titlePanel.SetActive(false);
+                            optionPanel.SetActive(true);
+                            isOnMenu = true;
+                            break;
+                        case "CreditCollider":
+                            titlePanel.SetActive(false);
+                            creditPanel.SetActive(true);
+                            isOnMenu = true;
+                            break;
+                        case "QuitCollider":
+                            Application.Quit();
+                            break;
+                        default:
+                            Debug.Log("other");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                if (hit.collider != null && hit.collider.name =="PlayCollider")
+                {
+                    transform.parent.position = startPos;
+                    inMainMenu = false;
+                    mainTitle.SetActive(false);
+                    titlePanel.SetActive(true);
                 }
             }
         }
@@ -75,6 +98,7 @@ public class SlingshotMenu : MonoBehaviour {
         creditPanel.SetActive(false);
         transform.GetComponent<SpriteRenderer>().enabled = true;
         isOnMenu = false;
+        titlePanel.SetActive(true);
         
     }
 
@@ -84,6 +108,7 @@ public class SlingshotMenu : MonoBehaviour {
         optionPanel.SetActive(false);
         transform.GetComponent<SpriteRenderer>().enabled = true;
         isOnMenu = false;
+        titlePanel.SetActive(true);
 
     }
 
