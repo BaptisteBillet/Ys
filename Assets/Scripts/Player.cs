@@ -39,6 +39,7 @@ public partial class Player : MonoBehaviour {
     [SerializeField]
     private GameObject destroyedEffect;
 
+
     public GameObject currentTerrain;
     public GameObject startTerrain;
 

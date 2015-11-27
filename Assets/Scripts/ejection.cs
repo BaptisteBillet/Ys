@@ -13,6 +13,11 @@ public class ejection : MonoBehaviour
     bool isMaybeDoubleTapping = false;
     bool doubleTap = false;
     public bool ejectionAction = false;
+
+
+    [SerializeField]
+    private GameObject EjectionEffect;
+
     // Use this for initialization
     void Start()
     {
@@ -40,6 +45,9 @@ public class ejection : MonoBehaviour
 
     void attackCAC()
     {
+        Object effect = Instantiate(EjectionEffect, this.transform.position, Quaternion.identity);
+        Destroy(effect, 2f);
+
         otherPlayer = GameManagerScript.instance.getOtherPlayer(player.ID);
         doubleTap = true;
         if (Vector3.Distance(otherPlayer.transform.position, this.transform.position) < RangeAttackCAC + (otherPlayer.transform.localScale.x / 2)&&!ejectionAction && !transform.parent.GetComponentInChildren<SlingShot>().action)
