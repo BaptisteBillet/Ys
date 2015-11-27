@@ -342,6 +342,7 @@ public partial class Player : MonoBehaviour {
             switch (currentTypeZone)
             {
                 case TypeZone.TerrainType.MOUNTAIN:
+				SoundManagerEvent.emit(SoundManagerType.Shield);
                     CanvasMagicText.instance.ChangeText("Your have a Shield!");
 				    CanvasMagicText.instance.AppearText();
 				    CanvasMagicText.instance.HideText(3);

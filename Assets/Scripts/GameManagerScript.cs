@@ -45,6 +45,7 @@ public class GameManagerScript : MonoBehaviour {
         Player1 = null;
         Player2 = null;
         launch = false;
+		SoundManagerEvent.emit(SoundManagerType.MainTheme);
 	}
 	
 	// Update is called once per frame
@@ -260,6 +261,7 @@ public class GameManagerScript : MonoBehaviour {
 
     public void changeTurn()
     {
+		SoundManagerEvent.emit(SoundManagerType.NextTurn);
         //Debug.Log("Tour du joueur 1 : " + p1Turn);
         p1Turn = !p1Turn;
 		if(p1Turn)

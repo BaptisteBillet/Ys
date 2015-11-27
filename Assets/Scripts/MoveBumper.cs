@@ -96,6 +96,8 @@ public class MoveBumper : MonoBehaviour {
 
                     if (buttonIsOpened)
                     {
+
+						SoundManagerEvent.emit(SoundManagerType.TakeMush);
                         //m_Animator.SetTrigger("Close");
                         buttonIsOpened = false;
                         //temp
@@ -120,6 +122,7 @@ public class MoveBumper : MonoBehaviour {
 
             if (!buttonIsOpened)
             {
+				SoundManagerEvent.emit(SoundManagerType.ReleaseMush);
                 //m_Animator.SetTrigger("Open");
                 buttonIsOpened = true;
                 //temp

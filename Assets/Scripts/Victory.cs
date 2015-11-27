@@ -29,6 +29,8 @@ public class Victory : MonoBehaviour {
 
     void Start()
     {
+
+		SoundManagerEvent.emit(SoundManagerType.Victory);
         if(PlayerPrefs.GetInt("Winner")==1)
         {
             IsLionWin(false);
