@@ -33,10 +33,7 @@ public class ShakeManager : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            LetsShake();
-        }
+
     }
 
 

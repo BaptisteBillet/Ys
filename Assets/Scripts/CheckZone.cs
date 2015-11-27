@@ -21,6 +21,8 @@ public class CheckZone : MonoBehaviour {
             {
                 currentType = hit.collider.GetComponent<TypeZone>().terrainType;
                 transform.GetComponent<Player>().currentTypeZone= currentType;
+
+                transform.GetComponent<Player>().currentTerrain = hit.collider.gameObject;
             }
         }
 	}

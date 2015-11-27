@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class OptionScript : MonoBehaviour {
     GameObject optionPanel;
     static OptionScript mInst;
+    bool isInGame = false;
     static public OptionScript instance { get { return mInst; } }
+
     void Awake()
     {
         if (mInst == null) mInst = this;
@@ -15,8 +17,12 @@ public class OptionScript : MonoBehaviour {
     void Start()
     {
         Debug.Log("start");
-        optionPanel = GameObject.Find("OptionPanel");
-        optionPanel.SetActive(false);
+        if (isInGame)
+        {
+            optionPanel = GameObject.Find("OptionPanel");
+            optionPanel.SetActive(false);
+        }
+        
     }
 
     public Slider musicSlider;
