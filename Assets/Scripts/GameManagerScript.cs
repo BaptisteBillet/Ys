@@ -32,6 +32,8 @@ public class GameManagerScript : MonoBehaviour {
 	public int currentId;
     bool launch= false;
 
+	public Victory m_Victory;
+
     /****UI***/
 
 	// Use this for initialization
@@ -185,11 +187,12 @@ public class GameManagerScript : MonoBehaviour {
         if(LoserID == 1)
         {
             Debug.Log("P2 WIN");
-
+			m_Victory.IsLionWin(false);
         }
         else
         {
             Debug.Log("P1 WIN");
+			m_Victory.IsLionWin(true);
         }
     }
 

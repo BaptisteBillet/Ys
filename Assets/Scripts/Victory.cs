@@ -14,7 +14,7 @@ public class Victory : MonoBehaviour {
     public Image m_BackWinner;
 
 
-    void IsLionWin(bool isLionWin)
+    public void IsLionWin(bool isLionWin)
     {
         if(isLionWin)
         {
