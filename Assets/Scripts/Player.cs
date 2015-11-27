@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour {
     public int ID;
@@ -23,6 +24,8 @@ public partial class Player : MonoBehaviour {
     public int countCollision = 0;
     public bool collideAtStart = false;
     bool needValidMove = false;
+
+    public GameObject lifeBar;
 
     public Animator m_CercleAnimator;
     public Animator m_LifeAnimator;
@@ -48,7 +51,7 @@ public partial class Player : MonoBehaviour {
 
 	void Start () {
         health = 100;
-        Damage = 1;
+        Damage = 50;
         needValidMove = false;
         countCollision = 0;
         isMoving = false;
@@ -286,15 +289,15 @@ public partial class Player : MonoBehaviour {
             // get dmg
             if((health > damage)&&(damage > 0))
             {
+                
                 m_Damage = damage;
-
                 m_LifeAnimator.SetTrigger("Open");
                 Invoke("AssumeDamage", 0.26f);
                 
             }
             else
             {
-                Debug.Log("Player "+ID+" lost");
+
                 GameManagerScript.instance.endGame(ID);
                 Object effect = Instantiate(destroyedEffect, this.transform.position, Quaternion.identity);
                 Destroy(effect, 2f);
@@ -307,6 +310,9 @@ public partial class Player : MonoBehaviour {
     private void AssumeDamage()
     {
         health -= m_Damage;
+        lifeBar.GetComponent<Image>().fillAmount = health / 100.0f;
+        Debug.Log(health);
+                
     }
 
 }

@@ -7,7 +7,8 @@ public class GameManagerScript : MonoBehaviour {
         MENU,
         START,
         RUN,
-        END
+        END,
+        PAUSE,
 
     }; 
 
@@ -28,10 +29,11 @@ public class GameManagerScript : MonoBehaviour {
 
     public GameObject PlayerPrefab;
     public STATE state;
+    STATE lastState;
     public bool p1Turn;
 	public int currentId;
     bool launch= false;
-
+    int lastCurrentID=0;
 	public Victory m_Victory;
 
     /****UI***/
@@ -46,6 +48,7 @@ public class GameManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (Player1 != null && Player2 != null && state == STATE.START)
         {
             if (!launch)
@@ -65,11 +68,38 @@ public class GameManagerScript : MonoBehaviour {
                 gameRunning();
                 break;
             case STATE.END:
+
                 break;
             default: 
                 break;
         }
 	}
+
+    public void resetGame()
+    {
+        state = STATE.START;
+        currentId = 0;
+        Time.timeScale = 1f;
+    }
+    
+    public void setPauseGame(bool pauseGame)
+    {
+        if (pauseGame)
+        {
+            lastState = state;
+            //OptionScript.instance.setActiveOptionInGame(true);
+            state = STATE.MENU;
+            lastCurrentID = currentId;
+            currentId = 0;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            state = lastState;
+            currentId = lastCurrentID;
+            Time.timeScale = 1f;
+        }
+    }
 
     /************ modif **************/
     IEnumerator LaunchGame(float time)
@@ -104,7 +134,7 @@ public class GameManagerScript : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
         }
         
-        Debug.Log(StartPlayer.name + "Start");
+
         //StartPlayer.GetComponentInChildren<SpriteRenderer>().enabled = true;
         state = STATE.RUN;
         
@@ -184,17 +214,22 @@ public class GameManagerScript : MonoBehaviour {
         state = STATE.END;
         scriptP1.setTurn(false);
         scriptP2.setTurn(false);
-        if(LoserID == 1)
+        currentId = 0;
+        if (LoserID == 1)
         {
             Debug.Log("P2 WIN");
-			m_Victory.IsLionWin(false);
+            PlayerPrefs.SetInt("Winner", 1);
+
         }
         else
         {
             Debug.Log("P1 WIN");
-			m_Victory.IsLionWin(true);
+            PlayerPrefs.SetInt("Winner", 2);
+
         }
+        Application.LoadLevelAsync("VictoryScene");
     }
+
 
     public GameObject getPlayer(int ID)
     {

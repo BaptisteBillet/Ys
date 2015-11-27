@@ -16,9 +16,33 @@ public class Victory : MonoBehaviour {
 	public Animator m_Animator;
 
 	private bool m_ReadyToGo=false;
+    private bool m_panelIsOpened = false;
+    private bool m_panelIsOpened2 = false;
+
+    public GameObject m_1;
+    public GameObject m_2;
+    public GameObject m_3;
+    public GameObject m_4;
+
+    public GameObject m_Canvas;
+    private bool m_ClosePanel = false;
+
+    void Start()
+    {
+        if(PlayerPrefs.GetInt("Winner")==1)
+        {
+            IsLionWin(false);
+        }
+        else
+        {
+            IsLionWin(true);
+        }
+
+    }
 
     public void IsLionWin(bool isLionWin)
     {
+
         if(isLionWin)
         {
             m_ImageWinner.sprite = m_LionSprite;
@@ -30,7 +54,7 @@ public class Victory : MonoBehaviour {
             m_BackWinner.color = m_BearColor;
         }
 
-		m_Animator.SetTrigger ("Open");
+        m_Animator.SetTrigger("Open");
 
     }
 
@@ -41,9 +65,15 @@ public class Victory : MonoBehaviour {
 	}
 
 
-	void OnMouseDown()
-	{
-		m_Animator.SetTrigger ("Close");
-	}
+    void OnMouseDown()
+    {
+        Debug.Log(m_ReadyToGo);
+        if (m_ReadyToGo == true)
+        {
+            m_Animator.SetTrigger("Close");
+            //Load Selfie Scene
+        }
+    }
+
 
 }
