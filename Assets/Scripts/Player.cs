@@ -39,7 +39,7 @@ public partial class Player : MonoBehaviour {
     [SerializeField]
     private GameObject destroyedEffect;
 
-
+    public GameObject powerUpEffect;
     public GameObject currentTerrain;
     public GameObject startTerrain;
 
@@ -58,6 +58,7 @@ public partial class Player : MonoBehaviour {
         isBumping = false;
         isMovingBump = false;
         startTypeZone = currentTypeZone;
+        powerUpEffect.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -146,6 +147,14 @@ public partial class Player : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        if (startTypeZone == TypeZone.TerrainType.FOREST && !collision.collider.GetComponent<Player>())
+        {
+            powerUpEffect.SetActive(true);
+        }
+        if (startTypeZone == TypeZone.TerrainType.PLAIN && !collision.collider.GetComponent<Player>())
+        {
+            powerUpEffect.SetActive(false);
+        }
         if (collision.gameObject.tag == "Wall")
         {
             foreach (ContactPoint contact in collision.contacts)
@@ -226,9 +235,14 @@ public partial class Player : MonoBehaviour {
             startTerrain = currentTerrain;
             startTypeZone = currentTypeZone;
             countCollision = 0;
+            if (startTypeZone == TypeZone.TerrainType.PLAIN)
+            {
+                powerUpEffect.SetActive(true);
+            }
         }
         else
         {
+            powerUpEffect.SetActive(false);
             m_CercleAnimator.SetTrigger("Close");
             m_LifeAnimator.SetTrigger("Open");
             isMovingBump = turn;
