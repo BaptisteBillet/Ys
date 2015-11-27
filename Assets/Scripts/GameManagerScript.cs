@@ -33,7 +33,6 @@ public class GameManagerScript : MonoBehaviour {
     bool launch= false;
 
     /****UI***/
-    public GameObject panelbumper;
 
 	// Use this for initialization
 	void Start () {

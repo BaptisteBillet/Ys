@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MoveBumper : MonoBehaviour {
     Ray ray;
     RaycastHit hit;
     bool onBumper = false;
     public int collisionCount;
+    bool buttonIsOpened = false;
     Vector3 collisionPosition;
 
     public GameObject Canvas;
     public Animator m_Animator;
+    public GameObject validateButton;
 
 	// Use this for initialization
 	void Start () {
         onBumper = false;
+        buttonIsOpened = false;
 	}
 
     void OnCollisionEnter(Collision col)
@@ -68,8 +72,11 @@ public class MoveBumper : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Canvas.transform.LookAt(Vector3.zero, Canvas.transform.up);
-
+        
+        //Canvas.transform.LookAt(Vector3.zero, Canvas.transform.forward);
+       // Debug.Log(Canvas.transform.name);
+       // Debug.Log(Canvas.transform.up);
+        //Debug.DrawRay(Vector3.zero, Canvas.transform.up);
 
 	    if(Input.GetMouseButton(0))
         {
@@ -79,9 +86,17 @@ public class MoveBumper : MonoBehaviour {
             {
                 if (hit.collider.GetComponent<MoveBumper>())
                 {
-                    m_Animator.SetTrigger("Close");
+                    MoveValidateButton();
+                    
+                    Debug.Log("close");
+                    if (buttonIsOpened)
+                    {
+                        m_Animator.SetTrigger("Close");
+                        buttonIsOpened = false;
+                    }
+                    
+                    
                     onBumper = true;
-                    GameManagerScript.instance.panelbumper.SetActive(false);
                     Vector3 bumperPos = Input.mousePosition;
                     bumperPos = Camera.main.ScreenToWorldPoint(bumperPos);
                     bumperPos.z = 0.0f;
@@ -95,9 +110,15 @@ public class MoveBumper : MonoBehaviour {
         }
         else if (Input.GetMouseButtonUp(0) && onBumper && collisionCount ==0)
         {
-            m_Animator.SetTrigger("Open");
+
+            if (!buttonIsOpened)
+            {
+                m_Animator.SetTrigger("Open");
+                buttonIsOpened = true;
+            }
+            
+            
             onBumper = false;
-            GameManagerScript.instance.panelbumper.SetActive(true);
         }
         
         
@@ -106,9 +127,22 @@ public class MoveBumper : MonoBehaviour {
     public void validMove()
     {
         GameObject player = GameManagerScript.instance.getPlayer(GameManagerScript.instance.getCurrentID());
-        m_Animator.SetTrigger("Close");
-        GameManagerScript.instance.panelbumper.SetActive(false);
+        Debug.Log("valide");
+        if (buttonIsOpened)
+        {
+            m_Animator.SetTrigger("Close");
+            buttonIsOpened = false;
+        }
+        
         player.GetComponent<Player>().actionReady = false;
         transform.GetComponent<MoveBumper>().enabled = false;
+    }
+
+    void MoveValidateButton()
+    {
+        Vector3 direction = Vector3.zero - transform.position;
+        direction.Normalize();
+        Debug.DrawRay(transform.position, direction * 2.0f, Color.red);
+        validateButton.transform.position = transform.position + direction*2.0f;
     }
 }
