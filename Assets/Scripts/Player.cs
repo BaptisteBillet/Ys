@@ -29,6 +29,19 @@ public partial class Player : MonoBehaviour {
 
     private int m_Damage;
 
+    //Particle effects
+    [SerializeField]
+    private GameObject wallCollisionEffect;
+    [SerializeField]
+    private GameObject bumperCollisionEffect;
+    [SerializeField]
+    private GameObject playerCollisionEffect;
+    [SerializeField]
+    private GameObject destroyedEffect;
+
+    public GameObject currentTerrain;
+    public GameObject startTerrain;
+
 	// Use this for initialization
 
 
@@ -48,6 +61,13 @@ public partial class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (startTypeZone != currentTypeZone && isBumping)
+        {
+            if (startTerrain != null)
+                startTerrain.GetComponent<TerrainEffectManager>().KillEffect();
+        }
+
         velocity = transform.GetComponent<Rigidbody>().velocity;
         playerSpeed = velocity.magnitude;
         if (playerSpeed != 0)
@@ -125,8 +145,30 @@ public partial class Player : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Wall")
+        {
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                Object effect = Instantiate(wallCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
+                Destroy(effect, 1f);
+            }
+        }
+
+        if (collision.gameObject.tag == "Bumper")
+        {
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                Object effect = Instantiate(bumperCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
+                Destroy(effect, 1f);
+            }
+        }
         if((GameManagerScript.instance.getCurrentID()== this.ID)&&(collision.collider.GetComponent<Player>())&&attackReady)
         {
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                Object effect = Instantiate(playerCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
+                Destroy(effect, 1f);
+            }
             if (startTypeZone == TypeZone.TerrainType.PLAIN && countCollision == 0)
             {
                 collision.collider.GetComponent<Player>().takeDamage(this.Damage*2);
@@ -179,6 +221,8 @@ public partial class Player : MonoBehaviour {
             m_LifeAnimator.SetTrigger("Close");
 
             transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
+
+            startTerrain = currentTerrain;
             startTypeZone = currentTypeZone;
             countCollision = 0;
         }
@@ -187,6 +231,12 @@ public partial class Player : MonoBehaviour {
             m_CercleAnimator.SetTrigger("Close");
             m_LifeAnimator.SetTrigger("Open");
             isMovingBump = turn;
+
+            if (currentTerrain != null)
+            {
+                currentTerrain.GetComponent<TerrainEffectManager>().ActivateEffect();
+            }
+
             if (currentTypeZone == TypeZone.TerrainType.MOUNTAIN)
             {
                 isShieldUp = true;
@@ -230,6 +280,10 @@ public partial class Player : MonoBehaviour {
             else
             {
                 Debug.Log("Player "+ID+" lost");
+
+                Object effect = Instantiate(destroyedEffect, this.transform.position, Quaternion.identity);
+                Destroy(effect, 2f);
+                
                 // mort
             }
             HUDManager.Instance.updateLife(this.ID, health);
