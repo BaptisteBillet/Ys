@@ -117,6 +117,7 @@ public partial class Player : MonoBehaviour {
             Debug.Log("END Sling VALID");
             needValidMove = false;
             validatingEnd();
+			SoundManagerEvent.emit(SoundManagerType.PlacePlayer);
         }
         //END
         if(ID == GameManagerScript.instance.currentId )
@@ -186,6 +187,9 @@ public partial class Player : MonoBehaviour {
         }
         if (collision.gameObject.tag == "Wall")
         {
+
+			SoundManagerEvent.emit(SoundManagerType.BumpWall);
+
             foreach (ContactPoint contact in collision.contacts)
             {
                 Object effect = Instantiate(wallCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
@@ -195,6 +199,8 @@ public partial class Player : MonoBehaviour {
 
         if (collision.gameObject.tag == "bumper")
         {
+			SoundManagerEvent.emit(SoundManagerType.BumpBumper);
+
             foreach (ContactPoint contact in collision.contacts)
             {
                 Object effect = Instantiate(bumperCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
@@ -203,6 +209,8 @@ public partial class Player : MonoBehaviour {
         }
         if((GameManagerScript.instance.getCurrentID()== this.ID)&&(collision.collider.GetComponent<Player>())&&attackReady)
         {
+			SoundManagerEvent.emit(SoundManagerType.BumpPlayer);
+
             foreach (ContactPoint contact in collision.contacts)
             {
                 Object effect = Instantiate(playerCollisionEffect, contact.point, Quaternion.LookRotation(contact.normal));
@@ -352,9 +360,23 @@ public partial class Player : MonoBehaviour {
 			CanvasMagicText.instance.ChangeText("Shield Broke!");
 			CanvasMagicText.instance.AppearText();
 			CanvasMagicText.instance.HideText(3);
+
+			SoundManagerEvent.emit(SoundManagerType.CrashGlass);
+
         }
         else
         {
+
+			if(ID==1)
+			{
+				SoundManagerEvent.emit(SoundManagerType.DamageBear);
+			}
+			else
+			{
+				SoundManagerEvent.emit(SoundManagerType.DamageLion);
+			}
+
+
             // get dmg
             if((health > damage)&&(damage > 0))
             {

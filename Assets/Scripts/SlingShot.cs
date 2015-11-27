@@ -70,12 +70,14 @@ public class SlingShot : MonoBehaviour {
             {
                 Debug.Log("P1 BOOST");
                 transform.parent.GetComponent<Rigidbody>().velocity *= 2;
+				SoundManagerEvent.emit(SoundManagerType.SpellAcceleration);
             }
             else
             {
                 Debug.Log("P2 STOP");
                 transform.parent.GetComponent<Rigidbody>().velocity /= 2;
                 StartCoroutine(powerStop());
+				SoundManagerEvent.emit(SoundManagerType.SpellStop);
             }
         }
 
