@@ -14,9 +14,16 @@ public class MoveBumper : MonoBehaviour {
     public Animator m_Animator;
     public GameObject validateButton;
 
+    void Awake()
+    {
+        validateButton.SetActive(false);
+    }
 	// Use this for initialization
 	void Start () {
         onBumper = false;
+        m_Animator.SetTrigger("Close");
+        //temp
+        validateButton.SetActive(false);
         buttonIsOpened = false;
 	}
 
@@ -34,7 +41,6 @@ public class MoveBumper : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("triggerEnter");
         if(col.tag =="bumper")
         {
             collisionCount++;
@@ -77,7 +83,6 @@ public class MoveBumper : MonoBehaviour {
        // Debug.Log(Canvas.transform.name);
        // Debug.Log(Canvas.transform.up);
         //Debug.DrawRay(Vector3.zero, Canvas.transform.up);
-
 	    if(Input.GetMouseButton(0))
         {
             
@@ -91,8 +96,10 @@ public class MoveBumper : MonoBehaviour {
                     Debug.Log("close");
                     if (buttonIsOpened)
                     {
-                        m_Animator.SetTrigger("Close");
+                        //m_Animator.SetTrigger("Close");
                         buttonIsOpened = false;
+                        //temp
+                        validateButton.SetActive(false);
                     }
                     
                     
@@ -113,8 +120,10 @@ public class MoveBumper : MonoBehaviour {
 
             if (!buttonIsOpened)
             {
-                m_Animator.SetTrigger("Open");
+                //m_Animator.SetTrigger("Open");
                 buttonIsOpened = true;
+                //temp
+                validateButton.SetActive(true);
             }
             
             
@@ -128,12 +137,14 @@ public class MoveBumper : MonoBehaviour {
     {
         GameObject player = GameManagerScript.instance.getPlayer(GameManagerScript.instance.getCurrentID());
         Debug.Log("valide");
+
         if (buttonIsOpened)
         {
-            m_Animator.SetTrigger("Close");
+            //m_Animator.SetTrigger("Close");
             buttonIsOpened = false;
+            //temp
+            validateButton.SetActive(false);
         }
-        
         player.GetComponent<Player>().actionReady = false;
         transform.GetComponent<MoveBumper>().enabled = false;
     }
