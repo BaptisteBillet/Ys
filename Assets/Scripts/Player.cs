@@ -3,7 +3,7 @@ using System.Collections;
 
 public partial class Player : MonoBehaviour {
     public int ID;
-    public int health;
+    public int health =100;
     public bool isShieldUp;
     public TypeZone.TerrainType currentTypeZone;
     public TypeZone.TerrainType startTypeZone;
@@ -47,6 +47,7 @@ public partial class Player : MonoBehaviour {
 
 
 	void Start () {
+        health = 100;
         Damage = 1;
         needValidMove = false;
         countCollision = 0;
@@ -295,13 +296,12 @@ public partial class Player : MonoBehaviour {
             else
             {
                 Debug.Log("Player "+ID+" lost");
-
+                GameManagerScript.instance.endGame(ID);
                 Object effect = Instantiate(destroyedEffect, this.transform.position, Quaternion.identity);
                 Destroy(effect, 2f);
                 
                 // mort
             }
-            HUDManager.Instance.updateLife(this.ID, health);
         }
     }
 

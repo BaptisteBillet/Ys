@@ -24,7 +24,7 @@ public class lineDraw : MonoBehaviour {
     public void changeIsAim(bool value)
     {
         aim = value;
-        lineAim.enabled = value;
+        //lineAim.enabled = value;
     }
     void drawAim()
     {
