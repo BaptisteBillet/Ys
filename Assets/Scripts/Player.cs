@@ -154,7 +154,7 @@ public partial class Player : MonoBehaviour {
             }
         }
 
-        if (collision.gameObject.tag == "Bumper")
+        if (collision.gameObject.tag == "bumper")
         {
             foreach (ContactPoint contact in collision.contacts)
             {
