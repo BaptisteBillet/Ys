@@ -7,6 +7,7 @@ public class OptionScript : MonoBehaviour {
     static OptionScript mInst;
     bool isInGame = false;
     static public OptionScript instance { get { return mInst; } }
+
     void Awake()
     {
         if (mInst == null) mInst = this;
