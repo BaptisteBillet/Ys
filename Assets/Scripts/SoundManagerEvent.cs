@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
  * Comment émettre un event:
-		SoundManagerEvent.emit(EventManagerType.ENEMY_HIT);
+		SoundManagerEvent.emit(SoundManagerEvent.ENEMY_HIT);
  * 
  * Comment traiter un event (dans un start ou un initialisation)
 		EventManagerScript.onEvent += (EventManagerType emt, GameObject go) => {
@@ -28,36 +28,30 @@ using System.Collections;
 
 public enum SoundManagerType
 {
-	ABSOLUMENT,
-	BIENJOUE,
-	BONBOULOT,
-	BRAVO,
-	EXCELLENT,
-	SUPER,
-	AIEAIEAIE1,
-	AIEAIEAIE2,
-	AIEAIEAIE3,
-	CENESTPASCA,
-	NONNONNON1,
-	NONNONNON2,
-	PERDU,
-	PRESQUE,
-	TUFERASMIEUX,
-	RANDOMPOSITIVE,
-	RANDOMNEGATIVE,
-	TURMEL00,
-	TURMEL01,
-	TURMEL02,
-	TURMEL03,
-	TURMEL04,
-	TURMEL05,
-	TURMEL06,
-	TURMEL07,
-	TURMEL08,
-	TURMEL09,
-	TURMEL10,
-	MISHOOOO1,
-	MISHOOOO2
+	SlingScale,
+	SlingReleaseLion,
+	SlingReleaseBear,
+	DoubleTapLion,
+	DoubleTapBear,
+	BumpWall,
+	BumpPlayer,
+	BumpBumper,
+	DamageLion,
+	DamageBear,
+	PlacePlayer,
+	Transition,
+	SpellAcceleration,
+	SpellStop,
+	TakeMush,
+	ReleaseMush,
+	Shield,
+	Victory,
+	Validation,
+	NextTurn,
+
+	MainTheme,
+	MenuTheme
+
 }
 
 public class SoundManagerEvent : MonoBehaviour
