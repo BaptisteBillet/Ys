@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SlingshotMenu : MonoBehaviour {
     Vector3 startPos;
@@ -62,7 +63,7 @@ public class SlingshotMenu : MonoBehaviour {
     {
         transform.parent.position = startPos;
         creditPanel.SetActive(false);
-        transform.parent.GetComponent<Player>().m_ejectionZone.SetActive(true);
+        transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = true;
         //transform.GetComponent<SpriteRenderer>().enabled = true;
         isOnMenu = false;
         titlePanel.SetActive(true);
@@ -227,7 +228,7 @@ public class SlingshotMenu : MonoBehaviour {
             if (dist > 3)
             {
                 //transform.GetComponent<SpriteRenderer>().enabled = false;
-                transform.parent.GetComponent<Player>().m_ejectionZone.SetActive(false);
+                transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = false;
                 action = true;
                 var direction = mouseDownPos - mouseUpPos;
                 transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force);

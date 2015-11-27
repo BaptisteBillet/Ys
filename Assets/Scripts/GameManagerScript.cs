@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour {
     public enum STATE
@@ -128,7 +129,7 @@ public class GameManagerScript : MonoBehaviour {
         {
             if (currentTime == 0.1f)
             {
-                OtherPlayer.GetComponent<Player>().m_ejectionZone.SetActive(false);
+                OtherPlayer.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = false;
             }
             currentTime += 0.1f;
             yield return new WaitForSeconds(0.1f);

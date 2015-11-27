@@ -234,7 +234,7 @@ public partial class Player : MonoBehaviour {
             m_CercleAnimator.SetTrigger("Open");
             m_LifeAnimator.SetTrigger("Close");
 
-            m_ejectionZone.SetActive(true);
+            m_ejectionZone.GetComponent<Image>().enabled = true;
             //transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
 
             startTerrain = currentTerrain;
@@ -247,6 +247,7 @@ public partial class Player : MonoBehaviour {
         }
         else
         {
+            m_ejectionZone.GetComponent<Image>().enabled = false;
             powerUpEffect.SetActive(false);
             m_CercleAnimator.SetTrigger("Close");
             m_LifeAnimator.SetTrigger("Open");
