@@ -38,34 +38,34 @@ public class SoundManager : MonoBehaviour {
 		switch (emt)
 		{
 			case SoundManagerType.BumpBumper:
-				Source[2].Stop();
-				Source[2].clip = Music[0];
-				Source[2].Play();
+				Source[5].Stop();
+				Source[5].clip = Sound[0];
+				Source[5].Play();
 				break;
 
 		case SoundManagerType.BumpPlayer:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[5].Stop();
+			Source[5].clip = Sound[1];
+			Source[5].Play();
 			break;
 
 		case SoundManagerType.BumpWall:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[5].Stop();
+			Source[5].clip = Sound[2];
+			Source[5].Play();
 			break;
 
 
 		case SoundManagerType.DamageBear:
 			Source[2].Stop();
-			Source[2].clip = Music[0];
+			Source[2].clip = BearRoar[0];
 			Source[2].Play();
 			break;
 
 		case SoundManagerType.DamageLion:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[1].Stop();
+			Source[1].clip = LionRoar[0];
+			Source[1].Play();
 			break;
 
 		case SoundManagerType.DoubleTapBear:
@@ -75,96 +75,101 @@ public class SoundManager : MonoBehaviour {
 			break;
 
 		case SoundManagerType.DoubleTapLion:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[1].Stop();
+			Source[1].clip = LionRoar[1];
+			Source[1].Play();
 			break;
 
 		case SoundManagerType.MainTheme:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[0].Stop();
+			Source[0].clip = Music[0];
+			Source[0].Play();
 			break;
 
 		case SoundManagerType.MenuTheme:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[0].Stop();
+			Source[0].clip = Music[1];
+			Source[0].Play();
 			break;
 
 		case SoundManagerType.NextTurn:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[7].Stop();
+			Source[7].clip = Sound[3];
+			Source[7].Play();
 			break;
 
 		case SoundManagerType.PlacePlayer:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[10].Stop();
+			Source[10].clip = Sound[4];
+			Source[10].Play();
 			break;
 
-
 			case SoundManagerType.ReleaseMush:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[8].Stop();
+			Source[8].clip = Sound[5];
+			Source[8].Play();
 			break;
 
 		case SoundManagerType.Shield:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[9].Stop();
+			Source[9].clip = Sound[6];
+			Source[9].Play();
 			break;
 
 		case SoundManagerType.SlingReleaseBear:
 			Source[2].Stop();
-			Source[2].clip = Music[0];
+			Source[2].clip = BearRoar[2];
 			Source[2].Play();
 			break;
 
 		case SoundManagerType.SlingReleaseLion:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[1].Stop();
+			Source[1].clip = LionRoar[2];
+			Source[1].Play();
 			break;
 
 		case SoundManagerType.SlingScale:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[10].Stop();
+			Source[10].clip = Sound[7];
+			Source[10].Play();
 			break;
 
 		case SoundManagerType.SpellStop:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[4].Stop();
+			Source[4].clip = Sound[9];
+			Source[4].Play();
+			break;
+
+		case SoundManagerType.SpellAcceleration:
+			Source[4].Stop();
+			Source[4].clip = Sound[8];
+			Source[4].Play();
 			break;
 
 		case SoundManagerType.TakeMush:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[8].Stop();
+			Source[8].clip = Sound[10];
+			Source[8].Play();
 			break;
 
 		case SoundManagerType.Transition:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[5].Stop();
+			Source[5].clip = Sound[11];
+			Source[5].Play();
 			break;
 
 		case SoundManagerType.Validation:
-			Source[2].Stop();
-			Source[2].clip = Music[0];
-			Source[2].Play();
+			Source[5].Stop();
+			Source[5].clip = Sound[12];
+			Source[5].Play();
 			break;
-
+			/*
 		case SoundManagerType.Victory:
 			Source[2].Stop();
-			Source[2].clip = Music[0];
+			Source[2].clip = Sound[0];
 			Source[2].Play();
 			break;
-
+*/
 		}
 	}
 
