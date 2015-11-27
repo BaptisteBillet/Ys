@@ -163,13 +163,25 @@ public class SoundManager : MonoBehaviour {
 			Source[5].clip = Sound[12];
 			Source[5].Play();
 			break;
-			/*
+
 		case SoundManagerType.Victory:
-			Source[2].Stop();
-			Source[2].clip = Sound[0];
-			Source[2].Play();
+			Source[5].Stop();
+			Source[5].clip = Sound[15];
+			Source[5].Play();
 			break;
-*/
+
+		case SoundManagerType.CrashGlass:
+			Source[5].Stop();
+			Source[5].clip = Sound[13];
+			Source[5].Play();
+			break;
+
+		case SoundManagerType.PhotoClick:
+			Source[5].Stop();
+			Source[5].clip = Sound[14];
+			Source[5].Play();
+			break;
+
 		}
 	}
 

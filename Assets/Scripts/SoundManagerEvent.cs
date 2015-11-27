@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
  * Comment émettre un event:
-		SoundManagerEvent.emit(SoundManagerEvent.ENEMY_HIT);
+		SoundManagerEvent.emit(SoundManagerType.ENEMY_HIT);
  * 
  * Comment traiter un event (dans un start ou un initialisation)
 		EventManagerScript.onEvent += (EventManagerType emt, GameObject go) => {
@@ -48,6 +48,8 @@ public enum SoundManagerType
 	Victory,
 	Validation,
 	NextTurn,
+	CrashGlass,
+	PhotoClick,
 
 	MainTheme,
 	MenuTheme

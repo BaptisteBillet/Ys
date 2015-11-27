@@ -104,6 +104,11 @@ public class SlingShot : MonoBehaviour {
     }
     void ScaleJauge()
     {
+
+
+
+
+
         lineRenderer.enabled = true;
         Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosInWorld.z = 0;
@@ -161,6 +166,9 @@ public class SlingShot : MonoBehaviour {
         StartCoroutine(CountDown(0.5f));
         if (!action && myID == GameManagerScript.instance.currentId && !transform.parent.GetComponent<Player>().doubleTap && !isOnPlayer && !transform.parent.GetComponent<Player>().isMovingBump && !transform.parent.GetComponentInChildren<ejection>().ejectionAction)
 		{
+
+			SoundManagerEvent.emit(SoundManagerType.SlingScale);
+
 			shoot = true;
 			playing = true;
             transform.parent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
@@ -185,7 +193,7 @@ public class SlingShot : MonoBehaviour {
     }
 
     void OnMouseUp()
-    {
+	{
         isSlingShotting = false;
         if (!action && playing && myID == GameManagerScript.instance.currentId && !transform.parent.GetComponent<Player>().doubleTap)
 		{
@@ -200,6 +208,17 @@ public class SlingShot : MonoBehaviour {
             }
             if (dist > 3)
             {
+				if(GameManagerScript.instance.currentId ==1)
+				{
+					SoundManagerEvent.emit(SoundManagerType.SlingReleaseBear);
+				}
+				else
+				{
+					SoundManagerEvent.emit(SoundManagerType.SlingReleaseLion);
+				}
+
+
+
                 shoot = false;
                 action = true;
                 powerUp = true;
