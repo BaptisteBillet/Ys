@@ -128,7 +128,7 @@ public class GameManagerScript : MonoBehaviour {
         {
             if (currentTime == 0.1f)
             {
-                OtherPlayer.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                OtherPlayer.GetComponent<Player>().m_ejectionZone.SetActive(false);
             }
             currentTime += 0.1f;
             yield return new WaitForSeconds(0.1f);

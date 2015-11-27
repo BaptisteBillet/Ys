@@ -62,7 +62,8 @@ public class SlingshotMenu : MonoBehaviour {
     {
         transform.parent.position = startPos;
         creditPanel.SetActive(false);
-        transform.GetComponent<SpriteRenderer>().enabled = true;
+        transform.parent.GetComponent<Player>().m_ejectionZone.SetActive(true);
+        //transform.GetComponent<SpriteRenderer>().enabled = true;
         isOnMenu = false;
         titlePanel.SetActive(true);
     }
@@ -225,7 +226,8 @@ public class SlingshotMenu : MonoBehaviour {
             }
             if (dist > 3)
             {
-                transform.GetComponent<SpriteRenderer>().enabled = false;
+                //transform.GetComponent<SpriteRenderer>().enabled = false;
+                transform.parent.GetComponent<Player>().m_ejectionZone.SetActive(false);
                 action = true;
                 var direction = mouseDownPos - mouseUpPos;
                 transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force);

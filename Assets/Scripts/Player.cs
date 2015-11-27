@@ -24,6 +24,7 @@ public partial class Player : MonoBehaviour {
     public int countCollision = 0;
     public bool collideAtStart = false;
     bool needValidMove = false;
+    public GameObject m_ejectionZone;
 
     public GameObject lifeBar;
 
@@ -233,7 +234,8 @@ public partial class Player : MonoBehaviour {
             m_CercleAnimator.SetTrigger("Open");
             m_LifeAnimator.SetTrigger("Close");
 
-            transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
+            m_ejectionZone.SetActive(true);
+            //transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
 
             startTerrain = currentTerrain;
             startTypeZone = currentTypeZone;
