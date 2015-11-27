@@ -14,7 +14,6 @@ public class SlingshotMenu : MonoBehaviour {
     public bool action = false;
     bool inMainMenu = true;
     public float force ;
-    bool isOnMenu = false;
     public float distanceMax = 7;
     bool isSlingShotting = false;
     LineRenderer lineRenderer;
@@ -30,16 +29,15 @@ public class SlingshotMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        inMainMenu = true;
         startPos = transform.position;
 
         force = 10;
         action = false;
         lineRenderer = transform.parent.gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
-
+        titlePanel.SetActive(true);
 		m_TitleAnimator.SetTrigger ("Open");
-
+        creditPanel.SetActive(false);
 		StartCoroutine (Helper ());
 
 	}
@@ -65,7 +63,6 @@ public class SlingshotMenu : MonoBehaviour {
         creditPanel.SetActive(false);
         //transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = true;
         //transform.GetComponent<SpriteRenderer>().enabled = true;
-        isOnMenu = false;
         titlePanel.SetActive(true);
     }
 	
@@ -97,14 +94,10 @@ public class SlingshotMenu : MonoBehaviour {
                             break;
                         case "OptionCollider":
                             Debug.Log("option");
-                            titlePanel.SetActive(false);
                             optionPanel.SetActive(true);
-                            isOnMenu = true;
                             break;
                         case "CreditCollider":
-                            titlePanel.SetActive(false);
                             creditPanel.SetActive(true);
-                            isOnMenu = true;
                             break;
                         case "QuitCollider":
                             Application.Quit();
@@ -190,7 +183,7 @@ public class SlingshotMenu : MonoBehaviour {
             mouseDownPos = transform.parent.position;
 
         }*/
-        if (!action&& !isOnMenu)
+        if (!action)
         {
 
 			if(m_IsFirstTime==false)
@@ -212,7 +205,7 @@ public class SlingshotMenu : MonoBehaviour {
     void OnMouseUp()
     {
         isSlingShotting = false;
-        if (!action && !isOnMenu)
+        if (!action)
         {
             mouseDownPos.z = 0;
             mouseUpPos = Input.mousePosition; //on stock la position de d'arrivée
