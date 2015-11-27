@@ -163,6 +163,16 @@ public partial class Player : MonoBehaviour {
 
                 isMovingBump = true;
                 GameManagerScript.instance.Bumper.GetComponent<MoveBumper>().enabled = true;
+
+                switch (currentTypeZone)
+                {
+                    case TypeZone.TerrainType.BUMPER:
+                        CanvasMagicText.instance.ChangeText("Move the Bumper");
+                        CanvasMagicText.instance.AppearText();
+                        CanvasMagicText.instance.HideText(3);
+                        break;
+
+                }
             }
             else
             {
@@ -188,7 +198,10 @@ public partial class Player : MonoBehaviour {
         if (collision.gameObject.tag == "Wall")
         {
 
+
 			SoundManagerEvent.emit(SoundManagerType.BumpWall);
+
+            ShakeManager.instance.LetsShake(4);
 
             foreach (ContactPoint contact in collision.contacts)
             {
@@ -199,7 +212,11 @@ public partial class Player : MonoBehaviour {
 
         if (collision.gameObject.tag == "bumper")
         {
+
 			SoundManagerEvent.emit(SoundManagerType.BumpBumper);
+
+
+            ShakeManager.instance.LetsShake(7);
 
             foreach (ContactPoint contact in collision.contacts)
             {
@@ -209,7 +226,11 @@ public partial class Player : MonoBehaviour {
         }
         if((GameManagerScript.instance.getCurrentID()== this.ID)&&(collision.collider.GetComponent<Player>())&&attackReady)
         {
+
 			SoundManagerEvent.emit(SoundManagerType.BumpPlayer);
+
+
+            ShakeManager.instance.LetsShake(10);
 
             foreach (ContactPoint contact in collision.contacts)
             {
@@ -283,6 +304,22 @@ public partial class Player : MonoBehaviour {
             {
                 powerUpEffect.SetActive(true);
             }
+
+            switch (startTypeZone)
+            {
+                case TypeZone.TerrainType.FOREST:
+                    CanvasMagicText.instance.ChangeText("Bounce for Double damage");
+                    CanvasMagicText.instance.AppearText();
+                    CanvasMagicText.instance.HideText(3);
+                    break;
+
+                case TypeZone.TerrainType.PLAIN:
+                    CanvasMagicText.instance.ChangeText("Direct Hit for Double damage");
+                    CanvasMagicText.instance.AppearText();
+                    CanvasMagicText.instance.HideText(3);
+                    break;
+
+            }
         }
         else
         {
@@ -299,39 +336,19 @@ public partial class Player : MonoBehaviour {
             if (currentTerrain != null)
             {
                 currentTerrain.GetComponent<TerrainEffectManager>().ActivateEffect();
-
-				switch(startTypeZone)
-				{
-				case TypeZone.TerrainType.BUMPER:
-					CanvasMagicText.instance.ChangeText("Move the Bumper");
-					CanvasMagicText.instance.AppearText();
-					CanvasMagicText.instance.HideText(3);
-					break;
-
-				case TypeZone.TerrainType.FOREST:
-					CanvasMagicText.instance.ChangeText("Bounce for Double damage");
-					CanvasMagicText.instance.AppearText();
-					CanvasMagicText.instance.HideText(3);
-					break;
-
-				case TypeZone.TerrainType.PLAIN:
-					CanvasMagicText.instance.ChangeText("Direct Hit for Double damage");
-					CanvasMagicText.instance.AppearText();
-					CanvasMagicText.instance.HideText(3);
-					break;
-
-				}
-
-
             }
 
-            if (currentTypeZone == TypeZone.TerrainType.MOUNTAIN)
-            {
-				CanvasMagicText.instance.ChangeText("Your have a Shield!");
-				CanvasMagicText.instance.AppearText();
-				CanvasMagicText.instance.HideText(3);
 
-                isShieldUp = true;
+            switch (currentTypeZone)
+            {
+                case TypeZone.TerrainType.MOUNTAIN:
+                    CanvasMagicText.instance.ChangeText("Your have a Shield!");
+				    CanvasMagicText.instance.AppearText();
+				    CanvasMagicText.instance.HideText(3);
+
+                    isShieldUp = true;
+                    break;
+
             }
         }
         
