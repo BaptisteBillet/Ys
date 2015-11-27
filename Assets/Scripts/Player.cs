@@ -64,6 +64,7 @@ public partial class Player : MonoBehaviour {
         isMovingBump = false;
         startTypeZone = currentTypeZone;
         powerUpEffect.SetActive(false);
+        startTerrain = currentTerrain;
 	}
 	
 	// Update is called once per frame
@@ -134,13 +135,12 @@ public partial class Player : MonoBehaviour {
             if (currentTypeZone == TypeZone.TerrainType.BUMPER)
             {
                 transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                Debug.Log("bump2");
+
                 isMovingBump = true;
                 GameManagerScript.instance.Bumper.GetComponent<MoveBumper>().enabled = true;
             }
             else
             {
-                Debug.Log("end2");
                 actionReady = false;
                 GameManagerScript.instance.Bumper.GetComponent<MoveBumper>().enabled = false;
                 
@@ -222,6 +222,7 @@ public partial class Player : MonoBehaviour {
         needValidMove = false;
         actionReady = turn;
         attackReady = turn;
+        startTerrain = currentTerrain;
         transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         foreach (Transform child in transform)
         {
@@ -237,7 +238,7 @@ public partial class Player : MonoBehaviour {
             m_ejectionZone.GetComponent<Image>().enabled = true;
             //transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
 
-            startTerrain = currentTerrain;
+            
             startTypeZone = currentTypeZone;
             countCollision = 0;
             if (startTypeZone == TypeZone.TerrainType.PLAIN)

@@ -142,6 +142,20 @@ public class GameManagerScript : MonoBehaviour {
         
     }
 
+    public bool arePlayerOnSameTerrain()
+    {
+        if (scriptP1.startTerrain == scriptP2.startTerrain)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
+
     public void MovePlayerIfCollide(Vector3 direction, GameObject player)
     {
         player.transform.Translate(direction*3.0f* Time.deltaTime);

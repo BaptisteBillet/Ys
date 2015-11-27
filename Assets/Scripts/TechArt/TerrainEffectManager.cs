@@ -6,6 +6,7 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 public class TerrainEffectManager : MonoBehaviour {
 
+    
     //private TypeZone.TerrainType currentType;
     [SerializeField]
     private GameObject currentEffect;

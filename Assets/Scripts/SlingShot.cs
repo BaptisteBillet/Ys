@@ -82,7 +82,7 @@ public class SlingShot : MonoBehaviour {
     IEnumerator powerStop()
     {
         yield return new WaitForSeconds(1f);
-        Debug.Log("P2 STOPED !");
+
         transform.parent.GetComponent<Rigidbody>().velocity *=0;
     }
 

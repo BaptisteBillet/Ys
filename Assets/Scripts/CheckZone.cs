@@ -23,6 +23,7 @@ public class CheckZone : MonoBehaviour {
                 transform.GetComponent<Player>().currentTypeZone= currentType;
 
                 transform.GetComponent<Player>().currentTerrain = hit.collider.gameObject;
+                Debug.Log("terrain: " + hit.collider.gameObject.name);
             }
         }
 	}

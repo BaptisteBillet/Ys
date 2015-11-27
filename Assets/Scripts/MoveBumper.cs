@@ -93,7 +93,7 @@ public class MoveBumper : MonoBehaviour {
                 {
                     MoveValidateButton();
                     
-                    Debug.Log("close");
+
                     if (buttonIsOpened)
                     {
                         //m_Animator.SetTrigger("Close");
@@ -136,7 +136,7 @@ public class MoveBumper : MonoBehaviour {
     public void validMove()
     {
         GameObject player = GameManagerScript.instance.getPlayer(GameManagerScript.instance.getCurrentID());
-        Debug.Log("valide");
+
 
         if (buttonIsOpened)
         {
