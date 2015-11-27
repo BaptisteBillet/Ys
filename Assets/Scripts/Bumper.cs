@@ -8,6 +8,9 @@ public class Bumper : MonoBehaviour {
 
     public Animator m_Animator;
 
+    [SerializeField]
+    private GameObject bumpEffect;
+
     public float puissance = 10;
 	// Use this for initialization
 	void Start () {
@@ -41,6 +44,10 @@ public class Bumper : MonoBehaviour {
         dir = playerPos -bumperPosition;
         player.gameObject.GetComponent<Rigidbody>().AddForce(dir * puissance);
         StartCoroutine(WaitBump(0.2f, player));
+
+
+        Object effect = Instantiate(bumpEffect, this.transform.position, Quaternion.identity);
+        Destroy(effect, 2f);
     }
 
     IEnumerator WaitBump(float time, GameObject player)
