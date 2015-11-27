@@ -63,7 +63,7 @@ public class SlingshotMenu : MonoBehaviour {
     {
         transform.parent.position = startPos;
         creditPanel.SetActive(false);
-        transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = true;
+        //transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = true;
         //transform.GetComponent<SpriteRenderer>().enabled = true;
         isOnMenu = false;
         titlePanel.SetActive(true);
@@ -84,10 +84,11 @@ public class SlingshotMenu : MonoBehaviour {
             int layer = 1 << 20;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, Mathf.Infinity, layer);
             Debug.DrawRay(transform.position, Vector3.forward, Color.red);
-            if (!inMainMenu)
-            {
+            /*if (!inMainMenu)
+            {*/
                 if (hit.collider != null)
                 {
+                    Debug.Log(hit.collider.name);
                     switch (hit.collider.name)
                     {
                         case "PlayCollider":
@@ -113,8 +114,8 @@ public class SlingshotMenu : MonoBehaviour {
                             break;
                     }
                 }
-            }
-            else
+            //}
+           /* else
             {
                 if (hit.collider != null && hit.collider.name =="PlayCollider")
                 {
@@ -122,7 +123,7 @@ public class SlingshotMenu : MonoBehaviour {
                     inMainMenu = false;
                     mainTitle.SetActive(false);
                 }
-            }
+            }*/
         }
 	}
 
@@ -228,7 +229,7 @@ public class SlingshotMenu : MonoBehaviour {
             if (dist > 3)
             {
                 //transform.GetComponent<SpriteRenderer>().enabled = false;
-                transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = false;
+                //transform.parent.GetComponent<Player>().m_ejectionZone.GetComponent<Image>().enabled = false;
                 action = true;
                 var direction = mouseDownPos - mouseUpPos;
                 transform.parent.GetComponentInParent<Rigidbody>().AddForce(direction * dist * force);
