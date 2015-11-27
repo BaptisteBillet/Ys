@@ -52,7 +52,7 @@ public partial class Player : MonoBehaviour {
 
 	void Start () {
         health = 100;
-        Damage = 50;
+        Damage = 10;
         needValidMove = false;
         countCollision = 0;
         isMoving = false;
@@ -70,11 +70,7 @@ public partial class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (startTypeZone != currentTypeZone && isBumping)
-        {
-            if (startTerrain != null)
-                startTerrain.GetComponent<TerrainEffectManager>().KillEffect();
-        }
+        
 
         velocity = transform.GetComponent<Rigidbody>().velocity;
         playerSpeed = velocity.magnitude;
@@ -85,6 +81,11 @@ public partial class Player : MonoBehaviour {
         else
         {
             isMoving = false;
+        }
+        if (startTypeZone != currentTypeZone && playerSpeed > 0)
+        {
+            if (startTerrain != null&& !GameManagerScript.instance.arePlayerOnSameTerrain())
+                startTerrain.GetComponent<TerrainEffectManager>().KillEffect();
         }
 
         //ADD
