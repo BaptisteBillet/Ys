@@ -16,6 +16,11 @@ public class ScaleUp : MonoBehaviour {
         Vector3 scale = new Vector3(m_ScaleDestination, m_ScaleDestination, 0);
         this.transform.localScale = Vector3.Lerp(this.transform.localScale, scale, Time.deltaTime * m_ScaleSpeed);
 
+        if (this.transform.localScale.x >= (scale.x-0.4f))
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
 }

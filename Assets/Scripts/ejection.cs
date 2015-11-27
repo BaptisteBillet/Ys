@@ -45,8 +45,7 @@ public class ejection : MonoBehaviour
 
     void attackCAC()
     {
-        Object effect = Instantiate(EjectionEffect, this.transform.position, Quaternion.identity);
-        Destroy(effect, 2f);
+        
 
         otherPlayer = GameManagerScript.instance.getOtherPlayer(player.ID);
         doubleTap = true;
@@ -60,6 +59,9 @@ public class ejection : MonoBehaviour
             ejectionAction = true;
             //StartCoroutine(waiting(0.1f));
             Debug.Log("Attack " + otherPlayer.name);
+
+            Object effect = Instantiate(EjectionEffect, this.transform.position, Quaternion.identity);
+            Destroy(effect, 2f);
 
         }
     }
