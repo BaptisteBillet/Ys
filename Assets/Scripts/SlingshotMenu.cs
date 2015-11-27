@@ -25,6 +25,8 @@ public class SlingshotMenu : MonoBehaviour {
 
 	private bool m_IsFirstTime=false;
 
+	public Animator m_HelpAnimator;
+
 	// Use this for initialization
 	void Start () {
         inMainMenu = true;
@@ -36,6 +38,23 @@ public class SlingshotMenu : MonoBehaviour {
         lineRenderer.enabled = false;
 
 		m_TitleAnimator.SetTrigger ("Open");
+
+		StartCoroutine (Helper ());
+
+	}
+
+	IEnumerator Helper()
+	{
+		yield return new WaitForSeconds (3);
+		RestartHelper ();
+	}
+
+
+	public void RestartHelper()
+	{
+		if (m_IsFirstTime == false) {
+			m_HelpAnimator.SetTrigger ("Appear");
+		}
 
 	}
 
@@ -173,6 +192,7 @@ public class SlingshotMenu : MonoBehaviour {
 
 			if(m_IsFirstTime==false)
 			{
+				StopAllCoroutines();
 				m_IsFirstTime=true;
 				m_ChoiceAnimator.SetTrigger("Open");
 				m_TitleAnimator.SetTrigger("Close");
