@@ -25,6 +25,7 @@ public partial class Player : MonoBehaviour {
     public bool collideAtStart = false;
     bool needValidMove = false;
     public GameObject m_ejectionZone;
+    bool uiTurnIsOn = false;
 
     public GameObject lifeBar;
 
@@ -49,10 +50,32 @@ public partial class Player : MonoBehaviour {
 
 	// Use this for initialization
 
+    public Image m_Animal;
+    public Image m_Background;
+    public Sprite m_Lion;
+    public Sprite m_Bear;
+    public Color m_LionColor;
+    public Color m_BearColor;
+
+    public void ChangeAnimal(bool isLion)
+    {
+        if(isLion)
+        {
+            m_Animal.sprite = m_Lion;
+            m_Background.color = m_LionColor;
+        }
+        else
+        {
+            m_Animal.sprite = m_Bear;
+            m_Background.color = m_BearColor;
+        }
+    }
+
 
 	void Start () {
         health = 100;
         Damage = 10;
+        uiTurnIsOn = false;
         needValidMove = false;
         countCollision = 0;
         isMoving = false;
@@ -234,7 +257,12 @@ public partial class Player : MonoBehaviour {
         }
         if (turn)
         {
-            m_CercleAnimator.SetTrigger("Open");
+            if (!uiTurnIsOn)
+            {
+                m_CercleAnimator.SetTrigger("Open");
+                uiTurnIsOn = true;
+            }
+            
             m_LifeAnimator.SetTrigger("Close");
 
             m_ejectionZone.GetComponent<Image>().enabled = true;
@@ -251,8 +279,12 @@ public partial class Player : MonoBehaviour {
         else
         {
             m_ejectionZone.GetComponent<Image>().enabled = false;
-            powerUpEffect.SetActive(false);
-            m_CercleAnimator.SetTrigger("Close");
+            if (uiTurnIsOn)
+            {
+                m_CercleAnimator.SetTrigger("Close");
+                uiTurnIsOn = false;
+            }
+            
             m_LifeAnimator.SetTrigger("Open");
             isMovingBump = turn;
 

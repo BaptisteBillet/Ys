@@ -26,6 +26,7 @@ public class SlingShot : MonoBehaviour {
     Player player;
 	public int myID;
     bool isOnPlayer = false;
+    bool uiTurnIsOn = false;
 
     bool isCircleAlreadyAppear=false;
 
@@ -35,6 +36,7 @@ public class SlingShot : MonoBehaviour {
 	void Start () {
         distanceMax = 6;
         force = 50;
+        uiTurnIsOn = true;
         shoot = false;
         playing = false;
         action = false;
